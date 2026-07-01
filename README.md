@@ -1,8 +1,8 @@
 # RunLens
 
-RunLens is local-first observability for browser automation: traces, failures, screenshots, network issues, console errors, and reliability metrics for Puppeteer, Playwright, and custom browser workflows.
+Local-first observability for browser automation reliability: runs, steps, selectors, screenshots, console errors, failed requests, retries, page context, and failure classification for Puppeteer, Playwright, and custom workflows.
 
-> Status: initial production scaffold. The public SDK, adapters, SQLite storage, dashboard, and examples are being built in milestone-sized commits.
+![RunLens dashboard](docs/assets/dashboard-smoke.png)
 
 ## Install
 
@@ -14,36 +14,121 @@ pnpm add runlens
 
 ```ts
 import { createRunLens } from "runlens";
+import { instrumentPlaywrightPage } from "runlens/adapters/playwright";
 
 const trace = createRunLens({
-  project: "example",
+  project: "lead-gen",
   mode: "silent",
   storage: { type: "sqlite", path: ".runlens/runlens.db" }
 });
 
 const run = await trace.startRun({ name: "lead-extraction-flow" });
+instrumentPlaywrightPage(page, run);
 
-await run.step("Open homepage", async () => {
-  await page.goto("https://example.com");
-});
+try {
+  await run.step("Open homepage", async () => {
+    await page.goto("https://example.com");
+  });
 
-await run.step("Click CTA", async () => {
-  await page.click("[data-testid=cta]");
-});
+  await run.step(
+    "Click CTA",
+    async () => {
+      await page.click("[data-testid=cta]");
+    },
+    { selector: "[data-testid=cta]", action: "click" }
+  );
 
-await run.end();
+  await run.end();
+} catch (error) {
+  await run.end("failed");
+  throw error;
+} finally {
+  await trace.close();
+}
 ```
 
-## Why it exists
+## Puppeteer
 
-Browser automations fail in ways that are hard to reconstruct: a selector moved, a navigation timed out, a login session expired, a challenge page appeared, a request failed, or the page emitted an error before the test code noticed. RunLens gives those failures a timeline and a local dashboard without changing automation behavior.
+```ts
+import puppeteer from "puppeteer";
+import { createRunLens } from "runlens";
+import { instrumentPuppeteerPage } from "runlens/adapters/puppeteer";
 
-RunLens observes automation. It does not bypass captcha, anti-bot systems, fingerprinting checks, or stealth protections. It can label possible challenge/manual-review states so developers can debug workflows responsibly.
+const browser = await puppeteer.launch();
+const page = await browser.newPage();
+const trace = createRunLens({
+  project: "puppeteer-app",
+  mode: "debugger",
+  storage: { type: "sqlite", path: ".runlens/runlens.db" }
+});
 
-## Supported modes
+const run = await trace.startRun({ name: "checkout-healthcheck" });
+instrumentPuppeteerPage(page, run);
+```
 
-- `silent`: minimal overhead event capture for existing workflows.
+## Playwright
+
+```ts
+import { chromium } from "playwright";
+import { createRunLens } from "runlens";
+import { instrumentPlaywrightPage } from "runlens/adapters/playwright";
+
+const browser = await chromium.launch();
+const page = await browser.newPage();
+const trace = createRunLens({
+  project: "playwright-app",
+  mode: "debugger",
+  storage: { type: "sqlite", path: ".runlens/runlens.db" }
+});
+
+const run = await trace.startRun({ name: "session-refresh" });
+instrumentPlaywrightPage(page, run);
+```
+
+## Dashboard
+
+```bash
+pnpm dev:dashboard
+```
+
+By default the dashboard reads `lab/test-runs/runlens.db`. Override it with:
+
+```bash
+RUNLENS_DB=.runlens/runlens.db pnpm dev:dashboard
+```
+
+## What RunLens Captures
+
+- Run and step start/end/status/duration.
+- Errors, stack traces, retry attempts, manual marks, and custom events.
+- Page URL/title at failure.
+- Console errors, page errors, failed requests, and HTTP 4xx/5xx responses.
+- Failure screenshots in silent mode.
+- Per-step screenshots and DOM snapshots in debugger mode.
+- Tags, metadata, runtime/library/browser environment, selectors, and actions.
+
+## Modes
+
+- `silent`: passive, low-overhead tracing for existing workflows.
 - `debugger`: richer local traces with screenshots, DOM snapshots, and timeline detail.
+
+## Failure Classes
+
+RunLens starts with rule-based classification:
+
+- `selector_missing`
+- `navigation_timeout`
+- `network_failure`
+- `blocked_or_challenge_page`
+- `auth/session_expired`
+- `validation_error`
+- `unknown`
+
+AI-assisted classification is intentionally left as a later provider interface; the observability foundation comes first.
+
+## Safety Boundary
+
+RunLens observes automation behavior. It does not bypass captcha, anti-bot systems, fingerprinting checks, stealth protections, or manual-review gates. It may label possible challenge states so developers can debug workflows responsibly.
 
 ## Architecture
 
@@ -56,34 +141,41 @@ flowchart LR
   E --> F["Runs, timeline, failures, artifacts, metrics"]
 ```
 
-## Repository layout
+## Repository Layout
 
 - `packages/sdk`: public npm SDK package (`runlens`).
-- `packages/core`: shared trace schema, event normalization, classification, and storage interfaces.
+- `packages/core`: shared trace schema, event normalization, classification, metrics, and storage contracts.
 - `apps/dashboard`: local dashboard for inspecting stored traces.
-- `examples`: Puppeteer, Playwright, and complex workflow examples.
-- `lab/fixtures`: harmless local pages for smoke and integration tests.
+- `examples/puppeteer-basic`: real Puppeteer example.
+- `examples/playwright-basic`: real Playwright example.
+- `examples/complex-workflow`: retries, manual-review marker, and intentional failure.
+- `lab/fixtures`: harmless local pages for browser automation tests.
 - `lab/test-runs`: generated traces, screenshots, logs, and milestone reports.
 - `docs`: usage, API, architecture, and design notes.
-- `scripts`: development, test, seed, and cleanup helpers.
+- `scripts`: development, smoke, seed, and cleanup helpers.
 
-## Local development
+## Local Development
 
 ```bash
 pnpm install
 pnpm build
 pnpm typecheck
 pnpm test
-pnpm smoke
+pnpm test:puppeteer
+pnpm test:playwright
+pnpm test:complex
 pnpm dev:dashboard
+pnpm test:dashboard
 ```
+
+Generated traces and screenshots are written under `lab/test-runs`.
 
 ## Roadmap
 
-- Core trace schema and SDK lifecycle.
-- Puppeteer and Playwright adapters.
-- SQLite trace storage.
-- Local dashboard with run list, timeline, failure analysis, artifacts, and metrics.
-- Real integration tests against fixture pages.
-- Optional provider interface for AI-assisted failure classification.
+- Harden published package metadata and release automation.
+- Add browser/context-level helpers for more framework variants.
+- Add exportable trace bundles for bug reports and CI artifacts.
+- Add richer selector flakiness analytics.
+- Add optional provider interface for AI-assisted classification.
+- Add a production dashboard server wrapper for packaged local installs.
 

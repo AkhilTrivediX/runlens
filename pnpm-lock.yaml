@@ -49,6 +49,15 @@ importers:
         specifier: ^19.1.6
         version: 19.2.3(@types/react@19.2.17)
 
+  examples/complex-workflow:
+    dependencies:
+      playwright:
+        specifier: ^1.57.0
+        version: 1.61.1
+      runlens:
+        specifier: workspace:*
+        version: link:../../packages/sdk
+
   examples/playwright-basic:
     dependencies:
       playwright:

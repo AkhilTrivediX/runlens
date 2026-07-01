@@ -1,4 +1,9 @@
 # Playwright Basic Example
 
-This example will demonstrate minimal Playwright instrumentation with the RunLens SDK.
+Runs Playwright against local fixture pages and records a passing debugger-mode trace.
 
+```bash
+pnpm test:playwright
+```
+
+Outputs are written under `lab/test-runs`, including screenshots and `runlens.db`.
