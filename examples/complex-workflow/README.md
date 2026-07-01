@@ -1,4 +1,9 @@
 # Complex Workflow Example
 
-This example will exercise multi-step navigation, form fill, retries, and an intentional failure.
+Runs a multi-step Playwright workflow with a login-like form, challenge/manual-review labels, retries, and an intentional missing-selector failure.
 
+```bash
+pnpm test:complex
+```
+
+The command exits successfully when the expected failed trace is created.

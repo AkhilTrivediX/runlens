@@ -13,6 +13,7 @@
     "test": "pnpm -r --if-present test",
     "test:puppeteer": "tsx examples/puppeteer-basic/src/index.ts",
     "test:playwright": "tsx examples/playwright-basic/src/index.ts",
+    "test:complex": "tsx examples/complex-workflow/src/index.ts",
     "test:dashboard": "tsx scripts/dashboard-smoke.ts",
     "smoke": "tsx scripts/smoke.ts",
     "dev:dashboard": "pnpm --filter @runlens/core build && pnpm --filter @runlens/dashboard dev",

@@ -1,4 +1,9 @@
 # Puppeteer Basic Example
 
-This example will demonstrate minimal Puppeteer instrumentation with the RunLens SDK.
+Runs Puppeteer against local fixture pages and records a passing debugger-mode trace.
 
+```bash
+pnpm test:puppeteer
+```
+
+Outputs are written under `lab/test-runs`, including screenshots and `runlens.db`.
