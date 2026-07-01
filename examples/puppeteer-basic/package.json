@@ -1,0 +1,14 @@
+{
+  "name": "@runlens/example-puppeteer-basic",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "puppeteer": "^24.31.0",
+    "runlens": "workspace:*"
+  }
+}
+
