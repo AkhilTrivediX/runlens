@@ -1,0 +1,22 @@
+{
+  "name": "runlens",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "description": "Lightweight observability SDK for browser automation reliability.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@runlens/core": "workspace:*"
+  }
+}
