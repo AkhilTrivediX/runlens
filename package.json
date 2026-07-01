@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "description": "RunLens is local-first observability for browser automation reliability.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkhilTrivediX/runlens.git"
+  },
   "packageManager": "pnpm@11.7.0",
   "engines": {
     "node": ">=20.19"
@@ -15,6 +20,7 @@
     "test:playwright": "tsx examples/playwright-basic/src/index.ts",
     "test:complex": "tsx examples/complex-workflow/src/index.ts",
     "test:dashboard": "tsx scripts/dashboard-smoke.ts",
+    "test:cli": "pnpm --filter runlens build && node packages/sdk/dist/cli.js doctor --db lab/test-runs/runlens.db",
     "smoke": "tsx scripts/smoke.ts",
     "dev:dashboard": "pnpm --filter @runlens/core build && pnpm --filter @runlens/dashboard dev",
     "clean:traces": "tsx scripts/clean-traces.ts"

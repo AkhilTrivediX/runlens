@@ -2,12 +2,24 @@
 
 Local-first observability for browser automation reliability: runs, steps, selectors, screenshots, console errors, failed requests, retries, page context, and failure classification for Puppeteer, Playwright, and custom workflows.
 
+![RunLens banner](docs/assets/runlens-banner-generated.png)
+
 ![RunLens dashboard](docs/assets/dashboard-smoke.png)
 
 ## Install
 
+From npm after release:
+
 ```bash
 pnpm add runlens
+```
+
+From this repository today:
+
+```bash
+pnpm --filter runlens build
+pnpm --filter runlens pack --pack-destination ../../dist-packages
+pnpm add ../runlens/dist-packages/runlens-0.0.0.tgz
 ```
 
 ## 30-second quickstart
@@ -97,6 +109,15 @@ By default the dashboard reads `lab/test-runs/runlens.db`. Override it with:
 RUNLENS_DB=.runlens/runlens.db pnpm dev:dashboard
 ```
 
+## CLI
+
+```bash
+runlens doctor --db .runlens/runlens.db
+runlens list --db .runlens/runlens.db
+runlens inspect --db .runlens/runlens.db
+runlens export --db .runlens/runlens.db --out runlens-export.json
+```
+
 ## What RunLens Captures
 
 - Run and step start/end/status/duration.
@@ -154,6 +175,18 @@ flowchart LR
 - `docs`: usage, API, architecture, and design notes.
 - `scripts`: development, smoke, seed, and cleanup helpers.
 
+## Documentation
+
+- [Getting started](docs/getting-started.md)
+- [SDK API](docs/api.md)
+- [CLI](docs/cli.md)
+- [Dashboard](docs/dashboard.md)
+- [Clean examples](docs/examples.md)
+- [Use cases](USECASES.md)
+- [Architecture](docs/architecture.md)
+- [Contributing](CONTRIBUTING.md)
+- [Security](SECURITY.md)
+
 ## Local Development
 
 ```bash
@@ -164,6 +197,7 @@ pnpm test
 pnpm test:puppeteer
 pnpm test:playwright
 pnpm test:complex
+pnpm test:cli
 pnpm dev:dashboard
 pnpm test:dashboard
 ```

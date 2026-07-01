@@ -4,6 +4,21 @@
   "private": false,
   "type": "module",
   "description": "Lightweight observability SDK for browser automation reliability.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkhilTrivediX/runlens.git",
+    "directory": "packages/sdk"
+  },
+  "keywords": [
+    "playwright",
+    "puppeteer",
+    "browser-automation",
+    "observability",
+    "tracing",
+    "sqlite",
+    "debugging"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -17,6 +32,9 @@
       "types": "./dist/adapters/playwright.d.ts",
       "default": "./dist/adapters/playwright.js"
     }
+  },
+  "bin": {
+    "runlens": "./dist/cli.js"
   },
   "files": ["dist", "README.md"],
   "scripts": {

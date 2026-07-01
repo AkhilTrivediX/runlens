@@ -102,6 +102,7 @@ export class SqliteTraceStorage implements TraceStorage {
     this.db = new DatabaseSync(this.path);
     this.db.exec(`
       PRAGMA journal_mode = WAL;
+      PRAGMA busy_timeout = 5000;
       CREATE TABLE IF NOT EXISTS runs (
         id TEXT PRIMARY KEY,
         project TEXT NOT NULL,
