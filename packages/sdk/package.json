@@ -8,6 +8,14 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./adapters/puppeteer": {
+      "types": "./dist/adapters/puppeteer.d.ts",
+      "default": "./dist/adapters/puppeteer.js"
+    },
+    "./adapters/playwright": {
+      "types": "./dist/adapters/playwright.d.ts",
+      "default": "./dist/adapters/playwright.js"
     }
   },
   "files": ["dist", "README.md"],
