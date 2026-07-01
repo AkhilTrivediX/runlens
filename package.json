@@ -11,6 +11,7 @@
     "build": "pnpm -r --if-present build",
     "typecheck": "pnpm -r --if-present typecheck",
     "test": "pnpm -r --if-present test",
+    "test:puppeteer": "tsx examples/puppeteer-basic/src/index.ts",
     "smoke": "tsx scripts/smoke.ts",
     "dev:dashboard": "pnpm --filter @runlens/dashboard dev",
     "clean:traces": "tsx scripts/clean-traces.ts"
@@ -22,4 +23,3 @@
     "vitest": "^3.2.4"
   }
 }
-
