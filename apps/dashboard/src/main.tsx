@@ -3,11 +3,16 @@ import { createRoot } from "react-dom/client";
 import {
   Activity,
   AlertTriangle,
+  BarChart3,
   Camera,
   CheckCircle2,
   Clock3,
   Database,
   Gauge,
+  GitBranch,
+  Network,
+  Radio,
+  Route,
   Search,
   Terminal,
   XCircle
@@ -39,6 +44,7 @@ interface TraceStep {
   name: string;
   status: "running" | "passed" | "failed" | "skipped";
   startedAt: string;
+  endedAt?: string;
   durationMs?: number;
   selector?: string;
   action?: string;
@@ -56,6 +62,14 @@ interface TraceIssue {
   failureClass?: string;
 }
 
+interface TraceEvent {
+  id: string;
+  stepId?: string;
+  type: string;
+  timestamp: string;
+  payload: Record<string, unknown>;
+}
+
 interface TraceArtifact {
   id: string;
   type: "screenshot" | "dom_snapshot" | "log" | "trace_json";
@@ -67,6 +81,7 @@ interface TraceArtifact {
 interface RunTrace {
   run: TraceRun;
   steps: TraceStep[];
+  events: TraceEvent[];
   issues: TraceIssue[];
   artifacts: TraceArtifact[];
 }
@@ -136,12 +151,13 @@ function App() {
           <span>RunLens</span>
         </div>
         <nav>
-          <a className="active" href="/">
+          <a className="active" href="#runs">
             Runs
           </a>
+          <a href="#monitoring">Monitor</a>
+          <a href="#timeline">Timeline</a>
           <a href="#failures">Failures</a>
           <a href="#artifacts">Artifacts</a>
-          <a href="#metrics">Metrics</a>
         </nav>
       </aside>
 
@@ -160,8 +176,9 @@ function App() {
         {error ? <div className="notice">{error}</div> : null}
 
         <MetricsStrip metrics={metrics} />
+        <MonitoringBoard runs={runs} metrics={metrics} trace={trace} />
 
-        <section className="workspace">
+        <section className="workspace" id="runs">
           <RunsList runs={filteredRuns} selectedRunId={selectedRunId} onSelect={setSelectedRunId} />
           <RunDetail trace={trace} />
         </section>
@@ -175,11 +192,77 @@ function MetricsStrip({ metrics }: { metrics?: Metrics }) {
   const slowest = metrics?.slowestSteps[0];
 
   return (
-    <section className="metrics" id="metrics" aria-label="Reliability metrics">
+    <section className="metrics" aria-label="Reliability metrics">
       <Metric icon={<Gauge size={18} />} label="Success rate" value={`${metrics?.successRate ?? 0}%`} />
       <Metric icon={<CheckCircle2 size={18} />} label="Passed runs" value={`${metrics?.passedRuns ?? 0}/${metrics?.totalRuns ?? 0}`} />
       <Metric icon={<AlertTriangle size={18} />} label="Top failure" value={topFailure ? `${topFailure.failureClass} (${topFailure.count})` : "-"} />
       <Metric icon={<Clock3 size={18} />} label="Slowest step" value={slowest ? `${slowest.name} ${formatDuration(slowest.averageDurationMs)}` : "-"} />
+    </section>
+  );
+}
+
+function MonitoringBoard({ runs, metrics, trace }: { runs: TraceRun[]; metrics?: Metrics; trace?: RunTrace }) {
+  const projects = new Set(runs.map((run) => run.project)).size;
+  const lastRun = runs[0];
+  const failedRecent = runs.slice(0, 12).filter((run) => run.status === "failed").length;
+  const health = Math.round(metrics?.successRate ?? 0);
+
+  return (
+    <section className="monitoringGrid" id="monitoring" aria-label="Monitoring overview">
+      <article className="monitorCard wide">
+        <div className="panelHeader">
+          <span>
+            <Radio size={16} />
+            Health stream
+          </span>
+          <strong>{health}%</strong>
+        </div>
+        <RunTrend runs={runs} />
+      </article>
+
+      <article className="monitorCard">
+        <div className="panelHeader">
+          <span>
+            <GitBranch size={16} />
+            Coverage
+          </span>
+        </div>
+        <div className="monitorStats">
+          <Summary label="Projects" value={`${projects}`} />
+          <Summary label="Recent failures" value={`${failedRecent}`} />
+          <Summary label="Last run" value={lastRun ? timeAgo(lastRun.startedAt) : "-"} />
+        </div>
+      </article>
+
+      <article className="monitorCard">
+        <div className="panelHeader">
+          <span>
+            <BarChart3 size={16} />
+            Failure mix
+          </span>
+        </div>
+        <FailureDistribution metrics={metrics} />
+      </article>
+
+      <article className="monitorCard">
+        <div className="panelHeader">
+          <span>
+            <Route size={16} />
+            Selector watchlist
+          </span>
+        </div>
+        <SelectorWatchlist metrics={metrics} />
+      </article>
+
+      <article className="monitorCard">
+        <div className="panelHeader">
+          <span>
+            <Network size={16} />
+            Active run signals
+          </span>
+        </div>
+        <ActiveSignals trace={trace} />
+      </article>
     </section>
   );
 }
@@ -193,6 +276,91 @@ function Metric({ icon, label, value }: { icon: ReactNode; label: string; value:
         <strong>{value}</strong>
       </div>
     </article>
+  );
+}
+
+function RunTrend({ runs }: { runs: TraceRun[] }) {
+  const recent = runs.slice(0, 18).reverse();
+  const maxDuration = Math.max(1, ...recent.map((run) => run.durationMs ?? 1));
+
+  if (recent.length === 0) {
+    return <p className="muted">No run trend yet.</p>;
+  }
+
+  return (
+    <div className="trendBars">
+      {recent.map((run) => (
+        <span
+          className={`trendBar ${run.status}`}
+          key={run.id}
+          style={{ height: `${Math.max(16, ((run.durationMs ?? 1) / maxDuration) * 86)}%` }}
+          title={`${run.project}: ${run.status} in ${formatDuration(run.durationMs)}`}
+        />
+      ))}
+    </div>
+  );
+}
+
+function FailureDistribution({ metrics }: { metrics?: Metrics }) {
+  const failures = metrics?.commonFailureClasses ?? [];
+  const max = Math.max(1, ...failures.map((failure) => failure.count));
+
+  if (failures.length === 0) {
+    return <p className="muted">No failure classes recorded.</p>;
+  }
+
+  return (
+    <div className="barList">
+      {failures.slice(0, 4).map((failure) => (
+        <div className="barRow" key={failure.failureClass}>
+          <span>{failure.failureClass}</span>
+          <div>
+            <i style={{ width: `${Math.max(8, (failure.count / max) * 100)}%` }} />
+          </div>
+          <strong>{failure.count}</strong>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function SelectorWatchlist({ metrics }: { metrics?: Metrics }) {
+  const selectors = metrics?.flakySelectors ?? [];
+
+  if (selectors.length === 0) {
+    return <p className="muted">No flaky selectors detected.</p>;
+  }
+
+  return (
+    <div className="watchlist">
+      {selectors.slice(0, 3).map((selector) => (
+        <div key={selector.selector}>
+          <strong>{selector.selector}</strong>
+          <span>
+            {selector.failures}/{selector.attempts} failed attempts
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ActiveSignals({ trace }: { trace?: RunTrace }) {
+  if (!trace) {
+    return <p className="muted">Select a run to inspect signals.</p>;
+  }
+
+  const network = trace.issues.filter((issue) => issue.type === "network_failure").length;
+  const consoleErrors = trace.issues.filter((issue) => issue.type === "console_error" || issue.type === "page_error").length;
+  const retries = trace.events.filter((event) => event.type === "retry_attempt_failed").length;
+
+  return (
+    <div className="signalGrid">
+      <Summary label="Events" value={`${trace.events.length}`} />
+      <Summary label="Network" value={`${network}`} />
+      <Summary label="Console" value={`${consoleErrors}`} />
+      <Summary label="Retries" value={`${retries}`} />
+    </div>
   );
 }
 
@@ -262,22 +430,34 @@ function RunDetail({ trace }: { trace?: RunTrace }) {
         <Summary label="Mode" value={trace.run.mode} />
       </section>
 
-      <section className="panel">
-        <h3>Timeline</h3>
-        <div className="timeline">
-          {trace.steps.map((step) => (
-            <div className="timelineItem" key={step.id}>
-              {step.status === "passed" ? <CheckCircle2 size={16} /> : step.status === "failed" ? <XCircle size={16} /> : <Clock3 size={16} />}
-              <div>
-                <div className="timelineTitle">
-                  <strong>{step.name}</strong>
-                  <span>{formatDuration(step.durationMs)}</span>
+      <section className="panel" id="timeline">
+        <h3>Graph timeline</h3>
+        <StepGraph trace={trace} />
+      </section>
+
+      <section className="detailGrid">
+        <section className="panel">
+          <h3>Step trace</h3>
+          <div className="timeline">
+            {trace.steps.map((step) => (
+              <div className="timelineItem" key={step.id}>
+                {step.status === "passed" ? <CheckCircle2 size={16} /> : step.status === "failed" ? <XCircle size={16} /> : <Clock3 size={16} />}
+                <div>
+                  <div className="timelineTitle">
+                    <strong>{step.name}</strong>
+                    <span>{formatDuration(step.durationMs)}</span>
+                  </div>
+                  <p>{[step.action, step.selector, step.failureClass].filter(Boolean).join(" | ") || "step"}</p>
                 </div>
-                <p>{[step.action, step.selector, step.failureClass].filter(Boolean).join(" | ") || "step"}</p>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="panel">
+          <h3>Event stream</h3>
+          <EventStream events={trace.events} />
+        </section>
       </section>
 
       <section className="detailGrid">
@@ -288,7 +468,7 @@ function RunDetail({ trace }: { trace?: RunTrace }) {
           ) : (
             <p className="muted">No run-level failure.</p>
           )}
-          {trace.issues.slice(0, 5).map((issue) => (
+          {trace.issues.slice(0, 6).map((issue) => (
             <IssueRow key={issue.id} icon={<Terminal size={16} />} title={`${issue.type} ${issue.failureClass ?? ""}`} detail={issue.message} />
           ))}
         </section>
@@ -314,6 +494,66 @@ function RunDetail({ trace }: { trace?: RunTrace }) {
         </div>
       </section>
     </section>
+  );
+}
+
+function StepGraph({ trace }: { trace: RunTrace }) {
+  const runStart = new Date(trace.run.startedAt).getTime();
+  const totalMs = Math.max(
+    1,
+    trace.run.durationMs ??
+      Math.max(
+        ...trace.steps.map((step) => new Date(step.endedAt ?? step.startedAt).getTime() - runStart + (step.durationMs ?? 0)),
+        1
+      )
+  );
+
+  return (
+    <div className="graphTimeline">
+      <div className="graphScale">
+        <span>0ms</span>
+        <span>{formatDuration(totalMs)}</span>
+      </div>
+      {trace.steps.map((step) => {
+        const offset = Math.max(0, new Date(step.startedAt).getTime() - runStart);
+        const left = Math.min(96, (offset / totalMs) * 100);
+        const width = Math.max(4, Math.min(100 - left, ((step.durationMs ?? 1) / totalMs) * 100));
+        const stepEvents = trace.events.filter((event) => event.stepId === step.id);
+
+        return (
+          <div className="graphRow" key={step.id}>
+            <span>{step.name}</span>
+            <div className="graphTrack">
+              <i className={`graphBar ${step.status}`} style={{ left: `${left}%`, width: `${width}%` }} />
+              {stepEvents.slice(0, 8).map((event) => {
+                const eventOffset = Math.max(0, new Date(event.timestamp).getTime() - runStart);
+                return <b key={event.id} style={{ left: `${Math.min(99, (eventOffset / totalMs) * 100)}%` }} title={event.type} />;
+              })}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function EventStream({ events }: { events: TraceEvent[] }) {
+  const visibleEvents = events.slice(-14).reverse();
+
+  if (visibleEvents.length === 0) {
+    return <p className="muted">No events recorded.</p>;
+  }
+
+  return (
+    <div className="eventStream">
+      {visibleEvents.map((event) => (
+        <div key={event.id}>
+          <span>{formatTime(event.timestamp)}</span>
+          <strong>{event.type}</strong>
+          <p>{payloadSummary(event.payload)}</p>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -375,8 +615,43 @@ function formatDate(value: string): string {
   }).format(new Date(value));
 }
 
+function formatTime(value: string): string {
+  return new Intl.DateTimeFormat(undefined, {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  }).format(new Date(value));
+}
+
+function timeAgo(value: string): string {
+  const diffMs = Date.now() - new Date(value).getTime();
+  if (diffMs < 60_000) {
+    return "now";
+  }
+  if (diffMs < 3_600_000) {
+    return `${Math.round(diffMs / 60_000)}m ago`;
+  }
+  if (diffMs < 86_400_000) {
+    return `${Math.round(diffMs / 3_600_000)}h ago`;
+  }
+  return `${Math.round(diffMs / 86_400_000)}d ago`;
+}
+
+function payloadSummary(payload: Record<string, unknown>): string {
+  const entries = Object.entries(payload).filter(([, value]) => value !== undefined && value !== null);
+  if (entries.length === 0) {
+    return "-";
+  }
+
+  return entries
+    .slice(0, 3)
+    .map(([key, value]) => `${key}: ${String(value).slice(0, 48)}`)
+    .join(" | ");
+}
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />
   </StrictMode>
 );
+

@@ -172,10 +172,26 @@ Generated traces and screenshots are written under `lab/test-runs`.
 
 ## Roadmap
 
-- Harden published package metadata and release automation.
-- Add browser/context-level helpers for more framework variants.
-- Add exportable trace bundles for bug reports and CI artifacts.
-- Add richer selector flakiness analytics.
-- Add optional provider interface for AI-assisted classification.
-- Add a production dashboard server wrapper for packaged local installs.
+- [x] Monorepo scaffold with separate SDK, core, dashboard, examples, fixtures, docs, and CI.
+- [x] Passive SDK run/step lifecycle with events, marks, retries, screenshots, and artifacts.
+- [x] Puppeteer and Playwright page adapters.
+- [x] SQLite local trace store and dashboard API.
+- [x] Dashboard runs list, run detail, issue summaries, artifacts, reliability metrics, and graph timeline.
+- [x] Real Puppeteer, Playwright, and complex expected-failure examples.
+- [ ] Browser/context-level adapters for Playwright contexts, Puppeteer browsers, `playwright-extra`, and `puppeteer-real-browser`.
+- [ ] CI reporter mode for attaching trace bundles to GitHub Actions runs.
+- [ ] Exportable `.runlens` trace bundles for bug reports.
+- [ ] Selector health analytics with flake score, first-seen/last-seen, and suggested owners.
+- [ ] Production local dashboard server wrapper for packaged installs.
+- [ ] Optional AI classification provider interface behind explicit user configuration.
 
+## Developer Preview Waitlist
+
+RunLens is built for teams with real browser automation pain: flaky selectors, blocked states, session churn, network instability, and browser-agent debugging.
+
+To join the preview waitlist, open a GitHub issue using the `Developer Preview Waitlist` template and include:
+
+- Browser stack: Puppeteer, Playwright, stealth plugins, browser agents, or custom tooling.
+- Approximate run volume per day.
+- Top failure modes you need to understand.
+- Whether you want local-only traces, CI artifacts, or team dashboards first.
