@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
+    "@runlens/core": "workspace:*",
     "@vitejs/plugin-react": "^4.6.0",
     "vite": "^7.0.2",
     "react": "^19.1.0",
@@ -22,4 +23,3 @@
     "@types/react-dom": "^19.1.6"
   }
 }
-

@@ -13,8 +13,9 @@
     "test": "pnpm -r --if-present test",
     "test:puppeteer": "tsx examples/puppeteer-basic/src/index.ts",
     "test:playwright": "tsx examples/playwright-basic/src/index.ts",
+    "test:dashboard": "tsx scripts/dashboard-smoke.ts",
     "smoke": "tsx scripts/smoke.ts",
-    "dev:dashboard": "pnpm --filter @runlens/dashboard dev",
+    "dev:dashboard": "pnpm --filter @runlens/core build && pnpm --filter @runlens/dashboard dev",
     "clean:traces": "tsx scripts/clean-traces.ts"
   },
   "devDependencies": {
