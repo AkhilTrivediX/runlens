@@ -1,0 +1,14 @@
+{
+  "name": "@runlens/example-playwright-basic",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "playwright": "^1.57.0",
+    "runlens": "workspace:*"
+  }
+}
+
