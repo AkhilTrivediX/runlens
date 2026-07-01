@@ -7,7 +7,6 @@ import {
   Camera,
   CheckCircle2,
   Clock3,
-  Database,
   Gauge,
   GitBranch,
   Network,
@@ -147,7 +146,7 @@ function App() {
     <main className="shell">
       <aside className="sidebar" aria-label="RunLens navigation">
         <div className="brand">
-          <Database size={18} />
+          <img src="/runlens-logo.png" alt="" />
           <span>RunLens</span>
         </div>
         <nav>
@@ -654,4 +653,3 @@ createRoot(document.getElementById("root")!).render(
     <App />
   </StrictMode>
 );
-
