@@ -178,6 +178,148 @@ h3 {
   overflow-wrap: anywhere;
 }
 
+.monitoringGrid {
+  display: grid;
+  grid-template-columns: minmax(300px, 1.35fr) repeat(4, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.monitorCard {
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+  background: #ffffff;
+  min-height: 142px;
+  padding: 14px;
+}
+
+.monitorCard.wide {
+  min-width: 0;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.panelHeader span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #475467;
+  font-size: 12px;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.panelHeader strong {
+  font-size: 22px;
+}
+
+.trendBars {
+  display: flex;
+  align-items: end;
+  gap: 6px;
+  height: 86px;
+  padding-top: 6px;
+}
+
+.trendBar {
+  border-radius: 4px 4px 0 0;
+  flex: 1;
+  min-width: 8px;
+  transition: opacity 120ms ease;
+}
+
+.trendBar:hover {
+  opacity: 0.72;
+}
+
+.trendBar.passed {
+  background: #16a34a;
+}
+
+.trendBar.failed {
+  background: #dc2626;
+}
+
+.trendBar.running {
+  background: #2563eb;
+}
+
+.trendBar.cancelled {
+  background: #71717a;
+}
+
+.monitorStats,
+.signalGrid {
+  display: grid;
+  gap: 8px;
+}
+
+.signalGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.barList,
+.watchlist {
+  display: grid;
+  gap: 10px;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: minmax(92px, 1fr) minmax(60px, 1.2fr) 24px;
+  gap: 8px;
+  align-items: center;
+}
+
+.barRow span,
+.watchlist span {
+  color: #667085;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.barRow div {
+  background: #eef2f7;
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.barRow i {
+  display: block;
+  background: #dc2626;
+  height: 100%;
+}
+
+.barRow strong {
+  font-size: 12px;
+  text-align: right;
+}
+
+.watchlist div {
+  border-top: 1px solid #edf0f3;
+  padding-top: 8px;
+}
+
+.watchlist div:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.watchlist strong {
+  display: block;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
 .workspace {
   display: grid;
   grid-template-columns: minmax(460px, 0.9fr) minmax(0, 1.1fr);
@@ -355,6 +497,110 @@ h3 {
   overflow-wrap: anywhere;
 }
 
+.graphTimeline {
+  display: grid;
+  gap: 10px;
+}
+
+.graphScale {
+  display: flex;
+  justify-content: space-between;
+  color: #667085;
+  font-size: 11px;
+}
+
+.graphRow {
+  display: grid;
+  grid-template-columns: minmax(140px, 0.34fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.graphRow > span {
+  font-size: 12px;
+  font-weight: 650;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.graphTrack {
+  position: relative;
+  background: #eef2f7;
+  border-radius: 999px;
+  height: 16px;
+  overflow: hidden;
+}
+
+.graphBar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+}
+
+.graphBar.passed {
+  background: #16a34a;
+}
+
+.graphBar.failed {
+  background: #dc2626;
+}
+
+.graphBar.running {
+  background: #2563eb;
+}
+
+.graphBar.skipped {
+  background: #94a3b8;
+}
+
+.graphTrack b {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  width: 2px;
+  background: #171b21;
+  opacity: 0.6;
+}
+
+.eventStream {
+  display: grid;
+  gap: 10px;
+  max-height: 360px;
+  overflow: auto;
+}
+
+.eventStream div {
+  border-top: 1px solid #edf0f3;
+  padding-top: 9px;
+}
+
+.eventStream div:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.eventStream span {
+  color: #667085;
+  display: block;
+  font-size: 11px;
+  margin-bottom: 3px;
+}
+
+.eventStream strong {
+  display: block;
+  font-size: 12px;
+}
+
+.eventStream p {
+  color: #667085;
+  font-size: 12px;
+  line-height: 1.45;
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+}
+
 .detailGrid {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
@@ -426,6 +672,14 @@ figcaption {
 }
 
 @media (max-width: 1180px) {
+  .monitoringGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .monitorCard.wide {
+    grid-column: 1 / -1;
+  }
+
   .workspace {
     grid-template-columns: 1fr;
   }
@@ -461,6 +715,7 @@ figcaption {
   }
 
   .metrics,
+  .monitoringGrid,
   .summaryGrid,
   .detailGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -474,13 +729,22 @@ figcaption {
   .row {
     min-width: 640px;
   }
+
+  .graphRow {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
 }
 
 @media (max-width: 560px) {
   .metrics,
+  .monitoringGrid,
   .summaryGrid,
   .detailGrid {
     grid-template-columns: 1fr;
   }
-}
 
+  .monitorCard.wide {
+    grid-column: auto;
+  }
+}

@@ -1,0 +1,47 @@
+name: Developer Preview Waitlist
+description: Join the RunLens developer preview waitlist.
+title: "Waitlist: "
+labels: ["waitlist"]
+body:
+  - type: input
+    id: organization
+    attributes:
+      label: Organization or project
+      description: What team or project would use RunLens?
+    validations:
+      required: true
+  - type: dropdown
+    id: browser_stack
+    attributes:
+      label: Browser automation stack
+      options:
+        - Playwright
+        - Puppeteer
+        - puppeteer-real-browser
+        - playwright-extra or stealth plugins
+        - browser-agent workflow
+        - Custom automation
+    validations:
+      required: true
+  - type: textarea
+    id: failure_modes
+    attributes:
+      label: Top failure modes
+      description: Selectors, navigation timeouts, captcha/challenge pages, auth/session expiry, network instability, or other issues.
+    validations:
+      required: true
+  - type: input
+    id: volume
+    attributes:
+      label: Approximate run volume
+      placeholder: "Example: 500 runs/day"
+  - type: checkboxes
+    id: interests
+    attributes:
+      label: Preview priorities
+      options:
+        - label: Local dashboard
+        - label: CI artifacts
+        - label: Team dashboard
+        - label: Selector flake analytics
+        - label: AI-assisted failure classification
