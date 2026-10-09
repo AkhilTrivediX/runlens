@@ -31,18 +31,33 @@
     "./adapters/playwright": {
       "types": "./dist/adapters/playwright.d.ts",
       "default": "./dist/adapters/playwright.js"
+    },
+    "./dashboard": {
+      "types": "./dist/dashboard.d.ts",
+      "default": "./dist/dashboard.js"
     }
   },
   "bin": {
     "runlens": "./dist/cli.js"
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && node ../../scripts/vendor-core.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "prepack": "pnpm --filter @runlens/core build && pnpm run build && pnpm --filter @runlens/dashboard build && node ../../scripts/prepare-package.mjs"
   },
-  "dependencies": {
+  "engines": {
+    "node": "^22.13.0 || >=24.0.0"
+  },
+  "author": {
+    "name": "Akhil Trivedi",
+    "email": "akhiltrivedix@gmail.com"
+  },
+  "devDependencies": {
     "@runlens/core": "workspace:*"
   }
 }

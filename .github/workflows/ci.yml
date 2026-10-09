@@ -8,6 +8,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22.13.0, 24]
     env:
       PUPPETEER_SKIP_DOWNLOAD: "true"
       PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
@@ -18,10 +21,20 @@ jobs:
           version: 11.7.0
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: ${{ matrix.node }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm smoke
+      - run: pnpm --filter @runlens/example-playwright-basic exec playwright install --with-deps chromium
+      - name: Locate Chromium for browser examples
+        run: |
+          browser_path=$(pnpm --filter @runlens/example-playwright-basic exec node -p "require('playwright').chromium.executablePath()")
+          echo "RUNLENS_CHROME_PATH=$browser_path" >> "$GITHUB_ENV"
+      - run: pnpm test:puppeteer
+      - run: pnpm test:playwright
+      - run: pnpm test:complex
+      - run: pnpm test:cli
+      - run: pnpm test:release
