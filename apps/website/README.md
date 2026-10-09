@@ -4,7 +4,7 @@ The public product landing page. The RunLens dashboard remains a separate local 
 
 The landing page includes a replayable illustrative trace with pause and resume, three failure scenarios and selectable step, event and DOM evidence. The quickstart switches between source commands, Playwright and Puppeteer integration code. Tabs support keyboard navigation. Replay runs once on viewport entry and pauses when the demo leaves view or the page is hidden. Reduced motion disables autoplay and spatial effects while retaining the controls.
 
-Live site: [runlens-mauve.vercel.app](https://runlens-mauve.vercel.app).
+Live site: [runlens.dev](https://runlens.dev).
 
 Published to Vercel production on 9 October 2026 using Node 24. The public deployment passes the same four viewport browser checks as the local build. Contact email remains akhiltrivedix@gmail.com.
 
