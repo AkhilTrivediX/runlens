@@ -27,6 +27,6 @@ vercel login
 vercel --prod
 ```
 
-The website contains a clearly labelled illustrative trace. Repository setup links currently target the release candidate branch. Once that branch is merged and the npm package is published, update the links and install guidance together. There is no hosted trace collection or dashboard account.
+The website contains a clearly labelled illustrative trace. Repository navigation links use the project home. Setup checks out a verified source snapshot while the release changes are under review. Once the release is merged and the npm package is published, update the source snapshot and install guidance together. There is no hosted trace collection or dashboard account.
 
 Typography is served locally. Its licence and source are in `public/fonts`. Contact and author email: akhiltrivedix@gmail.com.
