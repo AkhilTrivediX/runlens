@@ -38,7 +38,7 @@
     }
   },
   "bin": {
-    "runlens": "./dist/cli.js"
+    "runlens": "dist/cli.js"
   },
   "files": [
     "dist",
