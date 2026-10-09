@@ -4,6 +4,7 @@ dist/
 .next/
 .vite/
 coverage/
+.impeccable/review/
 *.tsbuildinfo
 
 .env

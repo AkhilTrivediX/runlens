@@ -1,0 +1,565 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-09T03:34:14.738Z",
+  "title": "Design System: RunLens",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0479 255.0)",
+          "oklch(26% 0.0479 255.0)",
+          "oklch(38% 0.0479 255.0)",
+          "oklch(49% 0.0479 255.0)",
+          "oklch(61% 0.0479 255.0)",
+          "oklch(72% 0.0479 255.0)",
+          "oklch(84% 0.0479 255.0)",
+          "oklch(95% 0.0479 255.0)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Supporting Steel",
+        "tonalRamp": [
+          "oklch(15% 0.0377 254.2)",
+          "oklch(26% 0.0377 254.2)",
+          "oklch(38% 0.0377 254.2)",
+          "oklch(49% 0.0377 254.2)",
+          "oklch(61% 0.0377 254.2)",
+          "oklch(72% 0.0377 254.2)",
+          "oklch(84% 0.0377 254.2)",
+          "oklch(95% 0.0377 254.2)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Structural Line",
+        "tonalRamp": [
+          "oklch(15% 0.0122 248.0)",
+          "oklch(26% 0.0122 248.0)",
+          "oklch(38% 0.0122 248.0)",
+          "oklch(49% 0.0122 248.0)",
+          "oklch(61% 0.0122 248.0)",
+          "oklch(72% 0.0122 248.0)",
+          "oklch(84% 0.0122 248.0)",
+          "oklch(95% 0.0122 248.0)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Investigation Blue",
+        "tonalRamp": [
+          "oklch(15% 0.1926 263.0)",
+          "oklch(26% 0.1926 263.0)",
+          "oklch(38% 0.1926 263.0)",
+          "oklch(49% 0.1926 263.0)",
+          "oklch(61% 0.1926 263.0)",
+          "oklch(72% 0.1926 263.0)",
+          "oklch(84% 0.1926 263.0)",
+          "oklch(95% 0.1926 263.0)"
+        ]
+      },
+      "accent-wash": {
+        "role": "primary",
+        "displayName": "Blue Wash",
+        "tonalRamp": [
+          "oklch(15% 0.0173 264.5)",
+          "oklch(26% 0.0173 264.5)",
+          "oklch(38% 0.0173 264.5)",
+          "oklch(49% 0.0173 264.5)",
+          "oklch(61% 0.0173 264.5)",
+          "oklch(72% 0.0173 264.5)",
+          "oklch(84% 0.0173 264.5)",
+          "oklch(95% 0.0173 264.5)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "White Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.9)",
+          "oklch(26% 0.0000 89.9)",
+          "oklch(38% 0.0000 89.9)",
+          "oklch(49% 0.0000 89.9)",
+          "oklch(61% 0.0000 89.9)",
+          "oklch(72% 0.0000 89.9)",
+          "oklch(84% 0.0000 89.9)",
+          "oklch(95% 0.0000 89.9)"
+        ]
+      },
+      "nav": {
+        "role": "primary",
+        "displayName": "Navigation Blue",
+        "tonalRamp": [
+          "oklch(15% 0.0581 256.1)",
+          "oklch(26% 0.0581 256.1)",
+          "oklch(38% 0.0581 256.1)",
+          "oklch(49% 0.0581 256.1)",
+          "oklch(61% 0.0581 256.1)",
+          "oklch(72% 0.0581 256.1)",
+          "oklch(84% 0.0581 256.1)",
+          "oklch(95% 0.0581 256.1)"
+        ]
+      },
+      "pass": {
+        "role": "secondary",
+        "displayName": "Passed Green",
+        "tonalRamp": [
+          "oklch(15% 0.0816 171.2)",
+          "oklch(26% 0.0816 171.2)",
+          "oklch(38% 0.0816 171.2)",
+          "oklch(49% 0.0816 171.2)",
+          "oklch(61% 0.0816 171.2)",
+          "oklch(72% 0.0816 171.2)",
+          "oklch(84% 0.0816 171.2)",
+          "oklch(95% 0.0816 171.2)"
+        ]
+      },
+      "fail": {
+        "role": "secondary",
+        "displayName": "Failed Copper",
+        "tonalRamp": [
+          "oklch(15% 0.1445 37.3)",
+          "oklch(26% 0.1445 37.3)",
+          "oklch(38% 0.1445 37.3)",
+          "oklch(49% 0.1445 37.3)",
+          "oklch(61% 0.1445 37.3)",
+          "oklch(72% 0.1445 37.3)",
+          "oklch(84% 0.1445 37.3)",
+          "oklch(95% 0.1445 37.3)"
+        ]
+      },
+      "fail-wash": {
+        "role": "secondary",
+        "displayName": "Failure Wash",
+        "tonalRamp": [
+          "oklch(15% 0.0168 56.2)",
+          "oklch(26% 0.0168 56.2)",
+          "oklch(38% 0.0168 56.2)",
+          "oklch(49% 0.0168 56.2)",
+          "oklch(61% 0.0168 56.2)",
+          "oklch(72% 0.0168 56.2)",
+          "oklch(84% 0.0168 56.2)",
+          "oklch(95% 0.0168 56.2)"
+        ]
+      },
+      "workspace": {
+        "role": "neutral",
+        "displayName": "Pale Steel",
+        "tonalRamp": [
+          "oklch(15% 0.0052 247.9)",
+          "oklch(26% 0.0052 247.9)",
+          "oklch(38% 0.0052 247.9)",
+          "oklch(49% 0.0052 247.9)",
+          "oklch(61% 0.0052 247.9)",
+          "oklch(72% 0.0052 247.9)",
+          "oklch(84% 0.0052 247.9)",
+          "oklch(95% 0.0052 247.9)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Interface Text",
+        "tonalRamp": [
+          "oklch(15% 0.0423 253.1)",
+          "oklch(26% 0.0423 253.1)",
+          "oklch(38% 0.0423 253.1)",
+          "oklch(49% 0.0423 253.1)",
+          "oklch(61% 0.0423 253.1)",
+          "oklch(72% 0.0423 253.1)",
+          "oklch(84% 0.0423 253.1)",
+          "oklch(95% 0.0423 253.1)"
+        ]
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "Focus Blue",
+        "tonalRamp": [
+          "oklch(15% 0.1112 264.5)",
+          "oklch(26% 0.1112 264.5)",
+          "oklch(38% 0.1112 264.5)",
+          "oklch(49% 0.1112 264.5)",
+          "oklch(61% 0.1112 264.5)",
+          "oklch(72% 0.1112 264.5)",
+          "oklch(84% 0.1112 264.5)",
+          "oklch(95% 0.1112 264.5)"
+        ]
+      },
+      "field-line": {
+        "role": "neutral",
+        "displayName": "Field Line",
+        "tonalRamp": [
+          "oklch(15% 0.0176 248.0)",
+          "oklch(26% 0.0176 248.0)",
+          "oklch(38% 0.0176 248.0)",
+          "oklch(49% 0.0176 248.0)",
+          "oklch(61% 0.0176 248.0)",
+          "oklch(72% 0.0176 248.0)",
+          "oklch(84% 0.0176 248.0)",
+          "oklch(95% 0.0176 248.0)"
+        ]
+      },
+      "nav-text": {
+        "role": "neutral",
+        "displayName": "Navigation Text",
+        "tonalRamp": [
+          "oklch(15% 0.0324 255.6)",
+          "oklch(26% 0.0324 255.6)",
+          "oklch(38% 0.0324 255.6)",
+          "oklch(49% 0.0324 255.6)",
+          "oklch(61% 0.0324 255.6)",
+          "oklch(72% 0.0324 255.6)",
+          "oklch(84% 0.0324 255.6)",
+          "oklch(95% 0.0324 255.6)"
+        ]
+      },
+      "nav-hover": {
+        "role": "neutral",
+        "displayName": "Navigation Hover",
+        "tonalRamp": [
+          "oklch(15% 0.0623 254.5)",
+          "oklch(26% 0.0623 254.5)",
+          "oklch(38% 0.0623 254.5)",
+          "oklch(49% 0.0623 254.5)",
+          "oklch(61% 0.0623 254.5)",
+          "oklch(72% 0.0623 254.5)",
+          "oklch(84% 0.0623 254.5)",
+          "oklch(95% 0.0623 254.5)"
+        ]
+      },
+      "nav-active": {
+        "role": "neutral",
+        "displayName": "Navigation Selection",
+        "tonalRamp": [
+          "oklch(15% 0.0225 260.7)",
+          "oklch(26% 0.0225 260.7)",
+          "oklch(38% 0.0225 260.7)",
+          "oklch(49% 0.0225 260.7)",
+          "oklch(61% 0.0225 260.7)",
+          "oklch(72% 0.0225 260.7)",
+          "oklch(84% 0.0225 260.7)",
+          "oklch(95% 0.0225 260.7)"
+        ]
+      },
+      "nav-active-text": {
+        "role": "neutral",
+        "displayName": "Selected Navigation Text",
+        "tonalRamp": [
+          "oklch(15% 0.0804 256.8)",
+          "oklch(26% 0.0804 256.8)",
+          "oklch(38% 0.0804 256.8)",
+          "oklch(49% 0.0804 256.8)",
+          "oklch(61% 0.0804 256.8)",
+          "oklch(72% 0.0804 256.8)",
+          "oklch(84% 0.0804 256.8)",
+          "oklch(95% 0.0804 256.8)"
+        ]
+      },
+      "pass-wash": {
+        "role": "secondary",
+        "displayName": "Passed Wash",
+        "tonalRamp": [
+          "oklch(15% 0.0100 164.9)",
+          "oklch(26% 0.0100 164.9)",
+          "oklch(38% 0.0100 164.9)",
+          "oklch(49% 0.0100 164.9)",
+          "oklch(61% 0.0100 164.9)",
+          "oklch(72% 0.0100 164.9)",
+          "oklch(84% 0.0100 164.9)",
+          "oklch(95% 0.0100 164.9)"
+        ]
+      },
+      "selected-failure": {
+        "role": "secondary",
+        "displayName": "Selected Failure",
+        "tonalRamp": [
+          "oklch(15% 0.0219 58.8)",
+          "oklch(26% 0.0219 58.8)",
+          "oklch(38% 0.0219 58.8)",
+          "oklch(49% 0.0219 58.8)",
+          "oklch(61% 0.0219 58.8)",
+          "oklch(72% 0.0219 58.8)",
+          "oklch(84% 0.0219 58.8)",
+          "oklch(95% 0.0219 58.8)"
+        ]
+      },
+      "track": {
+        "role": "neutral",
+        "displayName": "Timing Track",
+        "tonalRamp": [
+          "oklch(15% 0.0062 255.5)",
+          "oklch(26% 0.0062 255.5)",
+          "oklch(38% 0.0062 255.5)",
+          "oklch(49% 0.0062 255.5)",
+          "oklch(61% 0.0062 255.5)",
+          "oklch(72% 0.0062 255.5)",
+          "oklch(84% 0.0062 255.5)",
+          "oklch(95% 0.0062 255.5)"
+        ]
+      },
+      "timing-pass": {
+        "role": "secondary",
+        "displayName": "Passed Timing",
+        "tonalRamp": [
+          "oklch(15% 0.0616 172.4)",
+          "oklch(26% 0.0616 172.4)",
+          "oklch(38% 0.0616 172.4)",
+          "oklch(49% 0.0616 172.4)",
+          "oklch(61% 0.0616 172.4)",
+          "oklch(72% 0.0616 172.4)",
+          "oklch(84% 0.0616 172.4)",
+          "oklch(95% 0.0616 172.4)"
+        ]
+      },
+      "timing-fail": {
+        "role": "secondary",
+        "displayName": "Failed Timing",
+        "tonalRamp": [
+          "oklch(15% 0.1101 44.3)",
+          "oklch(26% 0.1101 44.3)",
+          "oklch(38% 0.1101 44.3)",
+          "oklch(49% 0.1101 44.3)",
+          "oklch(61% 0.1101 44.3)",
+          "oklch(72% 0.1101 44.3)",
+          "oklch(84% 0.1101 44.3)",
+          "oklch(95% 0.1101 44.3)"
+        ]
+      },
+      "timing-running": {
+        "role": "secondary",
+        "displayName": "Running Timing",
+        "tonalRamp": [
+          "oklch(15% 0.1186 263.6)",
+          "oklch(26% 0.1186 263.6)",
+          "oklch(38% 0.1186 263.6)",
+          "oklch(49% 0.1186 263.6)",
+          "oklch(61% 0.1186 263.6)",
+          "oklch(72% 0.1186 263.6)",
+          "oklch(84% 0.1186 263.6)",
+          "oklch(95% 0.1186 263.6)"
+        ]
+      },
+      "timing-skipped": {
+        "role": "secondary",
+        "displayName": "Skipped Timing",
+        "tonalRamp": [
+          "oklch(15% 0.0232 250.3)",
+          "oklch(26% 0.0232 250.3)",
+          "oklch(38% 0.0232 250.3)",
+          "oklch(49% 0.0232 250.3)",
+          "oklch(61% 0.0232 250.3)",
+          "oklch(72% 0.0232 250.3)",
+          "oklch(84% 0.0232 250.3)",
+          "oklch(95% 0.0232 250.3)"
+        ]
+      },
+      "event-marker": {
+        "role": "neutral",
+        "displayName": "Event Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0499 249.5)",
+          "oklch(26% 0.0499 249.5)",
+          "oklch(38% 0.0499 249.5)",
+          "oklch(49% 0.0499 249.5)",
+          "oklch(61% 0.0499 249.5)",
+          "oklch(72% 0.0499 249.5)",
+          "oklch(84% 0.0499 249.5)",
+          "oklch(95% 0.0499 249.5)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Page Headline",
+        "purpose": "Page heading with compact responsive reductions."
+      },
+      "title": {
+        "displayName": "Run Title",
+        "purpose": "Selected run title in the inspector."
+      },
+      "section": {
+        "displayName": "Section",
+        "purpose": "Panel, step and evidence headings."
+      },
+      "body": {
+        "displayName": "Interface Body",
+        "purpose": "Root interface type."
+      },
+      "supporting": {
+        "displayName": "Supporting",
+        "purpose": "Introductory descriptions."
+      },
+      "label": {
+        "displayName": "Status Label",
+        "purpose": "Recorded status names."
+      },
+      "measurement": {
+        "displayName": "Measurement",
+        "purpose": "Recorded durations and timing."
+      },
+      "code": {
+        "displayName": "Technical Evidence",
+        "purpose": "Error blocks, selectors and payloads."
+      }
+    },
+    "shadows": [
+      {
+        "name": "selected-filter",
+        "value": "0 1px 3px #17334b14",
+        "purpose": "Small lift for selected status filter. Main panels stay flat."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-transition",
+        "value": "background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease",
+        "purpose": "Control state transitions. Disabled under prefers-reduced-motion."
+      },
+      {
+        "name": "refresh-spin",
+        "value": "spin 1s linear infinite",
+        "purpose": "Refresh progress indicator. Disabled under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "1650px"
+      },
+      {
+        "name": "compact-desktop",
+        "value": "1250px"
+      },
+      {
+        "name": "tablet",
+        "value": "1000px"
+      },
+      {
+        "name": "mobile",
+        "value": "760px"
+      },
+      {
+        "name": "narrow-mobile",
+        "value": "420px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Follow Button",
+      "kind": "button",
+      "refersTo": "button-follow",
+      "description": "Toggle explicit polling of the local trace store.",
+      "html": "<button class=\"ds-follow\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M3 12a9 9 0 0 1 15-6l3 3M21 3v6h-6M21 12a9 9 0 0 1-15 6l-3-3M3 21v-6h6\"/></svg>Follow runs</button>",
+      "css": ".ds-follow{font-family:\"Segoe UI\",Helvetica,Arial,sans-serif;transition:background-color .18s ease,color .18s ease,border-color .18s ease;display:inline-flex;align-items:center;gap:8px;border:1px solid #cad4e0;border-radius:7px;background:var(--surface,#fff);color:#243549;font-size:13px;padding:9px 12px;cursor:pointer;}.ds-follow:hover{color:var(--accent,#255bd2);}.ds-follow:disabled{opacity:.55;cursor:wait;}.ds-follow:focus-visible{outline:3px solid #8aacf4;outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-follow{transition:none;}}"
+    },
+    {
+      "name": "Following Button",
+      "kind": "button",
+      "refersTo": "button-follow-active",
+      "description": "Make active polling visible.",
+      "html": "<button class=\"ds-following\" aria-pressed=\"true\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M3 12a9 9 0 0 1 15-6l3 3M21 3v6h-6M21 12a9 9 0 0 1-15 6l-3-3M3 21v-6h6\"/></svg>Following</button>",
+      "css": ".ds-following{font-family:\"Segoe UI\",Helvetica,Arial,sans-serif;transition:background-color .18s ease,color .18s ease,border-color .18s ease;display:inline-flex;align-items:center;gap:8px;border:1px solid #bfd1f4;border-radius:7px;background:var(--accent-wash,#edf3ff);color:var(--accent,#255bd2);font-size:13px;padding:9px 12px;cursor:pointer;}.ds-following:hover{color:var(--accent,#255bd2);}.ds-following:focus-visible{outline:3px solid #8aacf4;outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-following{transition:none;}}"
+    },
+    {
+      "name": "Text Action",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "Link from selected step context to all evidence.",
+      "html": "<button class=\"ds-text-action\">View all evidence <svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m9 18 6-6-6-6\"/></svg></button>",
+      "css": ".ds-text-action{font-family:\"Segoe UI\",Helvetica,Arial,sans-serif;transition:background-color .18s ease,color .18s ease,border-color .18s ease;display:inline-flex;align-items:center;gap:4px;color:var(--accent,#255bd2);font-size:12px;padding:9px 0;border:0;background:none;cursor:pointer;}.ds-text-action:hover{text-decoration:underline;text-underline-offset:3px;}.ds-text-action:focus-visible{outline:3px solid #8aacf4;outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-text-action{transition:none;}}"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Filter runs with a compact searchable field.",
+      "html": "<label class=\"ds-search\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><input aria-label=\"Search runs\" placeholder=\"Search runs…\"/></label>",
+      "css": ".ds-search{font-family:\"Segoe UI\",Helvetica,Arial,sans-serif;transition:background-color .18s ease,color .18s ease,border-color .18s ease;display:flex;align-items:center;gap:8px;background:var(--surface,#fff);border:1px solid #cdd7e1;border-radius:8px;padding:9px 10px;max-width:310px;color:var(--muted,#526276);}.ds-search input{font-family:\"Segoe UI\",Helvetica,Arial,sans-serif;width:100%;min-width:0;font-size:13px;outline:none;background:transparent;border:0;color:var(--ink,#203249);caret-color:var(--accent,#255bd2);}.ds-search input::placeholder{color:var(--muted,#526276);}.ds-search:focus-within{border-color:var(--accent,#255bd2);outline:2px solid #bacff6;outline-offset:1px;}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "navigation-item-active",
+      "description": "Show current destination in the deep blue shell.",
+      "html": "<nav class=\"ds-navigation\" aria-label=\"Dashboard\"><button class=\"ds-nav-item ds-nav-active\" aria-current=\"page\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01\"/></svg>Runs <span>24</span></button><button class=\"ds-nav-item\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01\"/></svg>Reliability</button></nav>",
+      "css": ".ds-navigation{font-family:\"Segoe UI\",Helvetica,Arial,sans-serif;display:grid;gap:6px;background:var(--nav,#182d49);padding:16px;width:218px;}.ds-nav-item{font-family:\"Segoe UI\",Helvetica,Arial,sans-serif;transition:background-color .18s ease,color .18s ease,border-color .18s ease;width:100%;display:flex;align-items:center;gap:10px;padding:11px 12px;border:0;border-radius:8px;text-align:left;color:#becde1;font-size:13px;background:none;cursor:pointer;}.ds-nav-item span{margin-left:auto;font-size:12px;font-variant-numeric:tabular-nums;}.ds-nav-item:hover{background:#263f5e;color:#fff;}.ds-nav-item.ds-nav-active{background:#e4edfc;color:#1d3b64;font-weight:650;}.ds-nav-item:focus-visible{outline:3px solid #8aacf4;outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-nav-item{transition:none;}}"
+    },
+    {
+      "name": "Failed Status",
+      "kind": "chip",
+      "refersTo": "status-failed",
+      "description": "Pair recorded status colour with readable icon and label.",
+      "html": "<span class=\"ds-status\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m15 9-6 6m0-6 6 6\"/></svg>Failed</span>",
+      "css": ".ds-status{font-family:\"Segoe UI\",Helvetica,Arial,sans-serif;display:inline-flex;gap:5px;align-items:center;font-size:12px;font-weight:550;white-space:nowrap;background:var(--fail-wash,#fff3eb);color:var(--fail,#b34a2a);padding:5px 7px;border-radius:5px;}"
+    },
+    {
+      "name": "Investigation Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Flat bordered white container for recorded runs and trace details.",
+      "html": "<section class=\"ds-panel\"><header><h2>Execution trace</h2><span>6 steps</span></header><div class=\"ds-panel-body\">Select a step to inspect its evidence.</div></section>",
+      "css": ".ds-panel{font-family:\"Segoe UI\",Helvetica,Arial,sans-serif;background:var(--surface,#fff);color:var(--ink,#203249);border:1px solid var(--line,#dce3ea);border-radius:var(--radius,14px);overflow:hidden;}.ds-panel header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line,#dce3ea);}.ds-panel h2{margin:0;font-size:13px;font-weight:650;}.ds-panel header span{font-size:11px;color:var(--muted,#526276);}.ds-panel-body{font-size:12px;color:var(--muted,#526276);padding:19px 22px 22px;}"
+    },
+    {
+      "name": "Selected Run",
+      "kind": "custom",
+      "refersTo": "ledger-row-selected",
+      "description": "Retain the run identity and timing while the inspector changes.",
+      "html": "<button class=\"ds-ledger-row\" aria-pressed=\"true\"><div class=\"ds-run-name\"><strong>Checkout workflow</strong><span>commerce · chromium</span><div>Local run · 09:42</div></div><div class=\"ds-run-meta\"><span>Failed</span><span>6.42 s</span></div></button>",
+      "css": ".ds-ledger-row{font-family:\"Segoe UI\",Helvetica,Arial,sans-serif;transition:background-color .18s ease,color .18s ease,border-color .18s ease;display:flex;align-items:flex-start;gap:10px;width:100%;padding:16px 16px 15px;text-align:left;border:0;border-bottom:1px solid #e8edf2;position:relative;min-height:95px;background:var(--accent-wash,#edf3ff);cursor:pointer;}.ds-ledger-row:after{content:\"\";position:absolute;right:0;top:0;bottom:0;width:1px;background:var(--accent,#255bd2);}.ds-ledger-row:hover{background:#f4f7fb;}.ds-run-name{flex:1;min-width:0;}.ds-run-name strong{display:block;font-size:13px;font-weight:600;color:var(--ink,#203249);line-height:1.45;overflow-wrap:anywhere;}.ds-run-name>span{display:block;font-size:11px;color:var(--muted,#526276);margin-top:4px;}.ds-run-name>div{font-size:10px;color:var(--muted,#526276);margin-top:10px;}.ds-run-meta{display:flex;flex-direction:column;gap:19px;align-items:flex-end;font-size:11px;color:var(--muted,#526276);font-variant-numeric:tabular-nums;}.ds-run-meta span:first-child{color:var(--fail,#b34a2a);font-weight:550;}.ds-ledger-row:focus-visible{outline:3px solid #8aacf4;outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-ledger-row{transition:none;}}"
+    },
+    {
+      "name": "Execution Waterfall",
+      "kind": "custom",
+      "refersTo": "waterfall-row",
+      "description": "Measured time lane with an event marker and selected step.",
+      "html": "<button class=\"ds-waterfall-row\" aria-pressed=\"true\"><span class=\"ds-step-label\">03 Submit order</span><span class=\"ds-waterfall-track\"><span class=\"ds-waterfall-bar\"></span><i title=\"Recorded event\"></i></span><span class=\"ds-duration\">2.40 s</span></button>",
+      "css": ".ds-waterfall-row{font-family:\"Segoe UI\",Helvetica,Arial,sans-serif;transition:background-color .18s ease,color .18s ease,border-color .18s ease;display:grid;grid-template-columns:minmax(155px,1fr) minmax(130px,1.25fr) 55px;gap:9px;align-items:center;width:100%;text-align:left;border:0;border-radius:5px;padding:10px 7px;min-height:42px;background:#fff0e5;cursor:pointer;}.ds-waterfall-row:hover{background:#f3f6fa;}.ds-step-label{font-size:11px;line-height:1.4;color:var(--ink,#203249);overflow-wrap:anywhere;}.ds-waterfall-track{display:block;position:relative;height:16px;background:#f0f3f7;border-radius:3px;overflow:hidden;}.ds-waterfall-bar{position:absolute;left:20%;width:60%;top:3px;bottom:3px;border-radius:2px;background:#cc7d5a;min-width:2px;}.ds-waterfall-track i{position:absolute;left:72%;top:5px;bottom:5px;width:1px;background:#243b52;opacity:.6;}.ds-duration{font-family:\"Cascadia Code\",Consolas,monospace;font-size:10px;color:var(--muted,#526276);text-align:right;white-space:nowrap;}.ds-waterfall-row:focus-visible{outline:3px solid #8aacf4;outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-waterfall-row{transition:none;}}@media(max-width:420px){.ds-waterfall-row{grid-template-columns:1fr 42px;}.ds-waterfall-track{grid-column:1/-1;grid-row:2;margin:7px 0;}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Investigation Instrument",
+    "overview": "RunLens uses the visual language of a measured browser run investigation instrument. Deep blue navigation anchors a pale steel workspace. Compact white surfaces hold runs, timing and evidence with clear boundaries. The atmosphere is calm and technical.\n\nSelection connects the run ledger to the execution waterfall and its evidence. Blue identifies actions and selected context. Green and copper report recorded outcomes. Density supports investigation without making every datum compete for attention.\n\nThe identity uses an authored geometric vector mark and existing library icons. Product decoration contains no generated imagery. Screenshots belong to captured browser evidence and retain their real source.",
+    "keyCharacteristics": [
+      "Deep blue navigation and a pale steel workspace.",
+      "Compact ledgers with a wider inspector.",
+      "Measured timing lanes and linked evidence.",
+      "Restrained colour with explicit status labels.",
+      "Familiar interface type paired with precise code and timing type."
+    ],
+    "rules": [
+      {
+        "name": "The Recorded State Rule",
+        "body": "Use green and copper for recorded outcomes. Preserve status text or an accessible icon label alongside colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Evidence Type Rule",
+        "body": "Keep IDs, selectors, payloads and measured durations in the implemented monospace stack. Allow long technical values to wrap.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Panel Rule",
+        "body": "Keep ledger, inspector and reliability panels flat. Use borders and tonal selection to establish context.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use blue to make selected context and available actions clear.",
+      "Do keep outcome colour tied to recorded status with visible or accessible labels.",
+      "Do retain measured waterfall timing and the connection between steps and evidence.",
+      "Do wrap long technical values and preserve the implemented type families.",
+      "Do use flat white panels with quiet borders on the steel workspace.",
+      "Do honour visible focus and reduced motion behaviour."
+    ],
+    "donts": [
+      "Don't add decorative shadows to the main investigation panels.",
+      "Don't replace recorded artifacts with decorative or generated imagery.",
+      "Don't use outcome colour without a status label or accessible icon label.",
+      "Don't make supporting text paler than the final muted token.",
+      "Don't separate step evidence from the selected execution context."
+    ]
+  }
+}
