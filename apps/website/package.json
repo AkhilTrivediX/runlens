@@ -1,0 +1,20 @@
+{
+  "name": "@runlens/website",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "vite --host 127.0.0.1 --port 5174"
+  },
+  "devDependencies": {
+    "vite": "^7.0.2"
+  },
+  "author": {
+    "name": "Akhil Trivedi",
+    "email": "akhiltrivedix@gmail.com"
+  },
+  "engines": {
+    "node": "^22.13.0 || >=24.0.0"
+  }
+}

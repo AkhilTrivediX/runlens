@@ -100,6 +100,8 @@ instrumentPlaywrightPage(page, run);
 
 ## Dashboard
 
+The public product landing page lives in `apps/website`. Preview it with `pnpm dev:website` and run its browser checks with `pnpm test:website`. See [website deployment instructions](apps/website/README.md) for Vercel configuration.
+
 ```bash
 pnpm dev:dashboard
 ```

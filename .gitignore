@@ -4,6 +4,7 @@ dist/
 .next/
 .vite/
 coverage/
+.vercel/
 lab/test-runs/ui/
 *.tsbuildinfo
 

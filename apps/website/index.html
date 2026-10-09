@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#332849" />
+    <meta
+      name="description"
+      content="Understand why your browser automation failed. RunLens captures runs, steps, selectors and browser evidence with a TypeScript SDK and a local dashboard."
+    />
+    <meta
+      property="og:title"
+      content="RunLens — See where your browser run broke."
+    />
+    <meta
+      property="og:description"
+      content="Browser automation observability for Playwright, Puppeteer and custom workflows. Trace the fault. Keep the evidence local."
+    />
+    <meta property="og:type" content="website" />
+    <title>RunLens — See where your browser run broke.</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="/fonts/bricolage-grotesque.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a href="#" class="brand" aria-label="RunLens home"
+        ><img src="/favicon.svg" width="32" height="32" alt="" />runlens<span
+          >.</span
+        ></a
+      >
+      <nav aria-label="Main navigation">
+        <a href="#how">How it works</a><a href="#start">Quickstart</a
+        ><a
+          href="https://github.com/AkhilTrivediX/runlens/tree/feature/trace-dashboard-and-website"
+          class="github-link"
+          >GitHub
+          <svg
+            class="arrow-icon"
+            width="16"
+            height="16"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 15 15 5M5 5h10v10" /></svg
+        ></a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero wrap" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <h1 id="hero-title">
+            Your browser ran.<br /><span>What went wrong?</span>
+          </h1>
+          <p>
+            Go from a failed automation to the step, selector and browser
+            evidence behind it. RunLens brings the whole run into focus.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#start"
+              >Start tracing
+              <svg
+                class="arrow-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 15 15 5M5 5h10v10" /></svg></a
+            ><a class="text-link" href="#demo"
+              >Explore a trace
+              <svg
+                class="arrow-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M10 3v14M4 11l6 6 6-6" /></svg
+            ></a>
+          </div>
+          <div class="hero-note">
+            <span class="local-dot" aria-hidden="true"></span>Local SQLite
+            storage. Open source. Yours to inspect.
+          </div>
+        </div>
+        <div
+          id="demo"
+          class="trace-demo"
+          aria-label="Interactive example trace"
+        >
+          <div class="demo-top">
+            <span class="demo-symbol" aria-hidden="true"
+              ><img src="/favicon.svg" alt="" /></span
+            ><span>Run explorer</span
+            ><span class="example-label">Illustrative trace</span>
+          </div>
+          <div class="demo-title">
+            <div>
+              <span class="project-label">checkout / playwright</span>
+              <h2>Complete checkout</h2>
+            </div>
+            <span class="failed-status"
+              ><svg
+                class="arrow-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m5 5 10 10M15 5 5 15" />
+              </svg>
+              Failed</span
+            >
+          </div>
+          <div class="trace-scale">
+            <span>Execution trace</span
+            ><span
+              >0 ms <span class="scale-line" aria-hidden="true"></span> 3.2
+              s</span
+            >
+          </div>
+          <div class="trace-steps" aria-label="Example run steps">
+            <button class="trace-step" data-step="0" aria-pressed="false">
+              <svg
+                class="step-icon pass-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m4 10 4 4 8-8" /></svg
+              ><span class="step-name">Open storefront</span
+              ><span class="timing"
+                ><span class="timing-fill timing-open"></span></span
+              ><span class="step-time">420 ms</span>
+            </button>
+            <button class="trace-step" data-step="1" aria-pressed="false">
+              <svg
+                class="step-icon pass-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m4 10 4 4 8-8" /></svg
+              ><span class="step-name">Add to basket</span
+              ><span class="timing"
+                ><span class="timing-fill timing-basket"></span></span
+              ><span class="step-time">180 ms</span>
+            </button>
+            <button
+              class="trace-step selected"
+              data-step="2"
+              aria-pressed="true"
+            >
+              <svg
+                class="step-icon fail-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m5 5 10 10M15 5 5 15" /></svg
+              ><span class="step-name">Submit order</span
+              ><span class="timing"
+                ><span class="timing-fill timing-submit"></span></span
+              ><span class="step-time">2.6 s</span>
+            </button>
+          </div>
+          <div class="step-detail" aria-live="polite" aria-atomic="true">
+            <div class="detail-title">
+              <span id="detail-kind">selector_missing</span
+              ><span id="detail-status">Failed step</span>
+            </div>
+            <p id="detail-message">The checkout button could not be found.</p>
+            <code id="detail-selector">[data-testid="place-order"]</code>
+            <div class="detail-context">
+              <span id="detail-evidence">DOM snapshot captured</span
+              ><span id="detail-time">at 00:03.200</span>
+            </div>
+          </div>
+          <div class="demo-footer">
+            <span
+              ><span class="local-dot" aria-hidden="true"></span>Evidence stays
+              with the run</span
+            ><span
+              >Click a step to inspect
+              <svg
+                class="arrow-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M15 15 5 5M15 5H5v10" /></svg
+            ></span>
+          </div>
+        </div>
+      </section>
+      <div class="compatibility wrap">
+        <span>Built for the browser stack you already use</span>
+        <div>
+          <span>Playwright</span><span>Puppeteer</span><span>TypeScript</span
+          ><span>Custom workflows</span>
+        </div>
+      </div>
+      <section id="how" class="workflow wrap" aria-labelledby="workflow-title">
+        <div class="section-intro">
+          <h2 id="workflow-title">
+            A failure is a moment.<br />The run is the context.
+          </h2>
+          <p>
+            A timeout on its own tells you very little. Keep the steps before
+            it, the page around it and the evidence at the breaking point
+            together.
+          </p>
+        </div>
+        <div class="workflow-layout">
+          <div class="capture-panel">
+            <div class="capture-heading">
+              <span>checkout-healthcheck</span
+              ><span class="capture-outcome">Failed</span>
+            </div>
+            <div class="capture-path">
+              <span>Navigate</span><i aria-hidden="true"></i><span>Click</span
+              ><i aria-hidden="true"></i><span class="path-fault">Inspect</span>
+            </div>
+            <div class="evidence-lines">
+              <div><span>STEP</span><strong>Submit order</strong></div>
+              <div>
+                <span>SELECTOR</span><code>[data-testid="place-order"]</code>
+              </div>
+              <div>
+                <span>CLASSIFICATION</span><strong>selector_missing</strong>
+              </div>
+              <div>
+                <span>EVIDENCE</span><strong>Screenshot · DOM · events</strong>
+              </div>
+            </div>
+            <p>Illustrative evidence summary</p>
+          </div>
+          <div class="workflow-list">
+            <article>
+              <h3>Capture the run.</h3>
+              <p>
+                Wrap meaningful steps and attach a browser adapter. Record
+                timings, selectors, console errors and failed requests as your
+                automation runs.
+              </p>
+            </article>
+            <article>
+              <h3>Find the breaking point.</h3>
+              <p>
+                Open the execution trace. Select a step to inspect its error,
+                page context and captured artifacts in one place.
+              </p>
+            </article>
+            <article>
+              <h3>See what repeats.</h3>
+              <p>
+                Compare failure classes, selector issues and slow steps in the
+                Reliability view. Export trace JSON when you need the whole
+                record.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="local-section" aria-labelledby="local-title">
+        <div class="wrap local-layout">
+          <div>
+            <h2 id="local-title">
+              The browser evidence<br />stays on your machine.
+            </h2>
+            <p>
+              RunLens stores traces in local SQLite. Its dashboard runs beside
+              your automation. Inspect screenshots, DOM snapshots and events
+              without a hosted tracing account.
+            </p>
+            <a
+              class="text-link light-link"
+              href="https://github.com/AkhilTrivediX/runlens/tree/feature/trace-dashboard-and-website/packages/sdk"
+              >Explore the SDK
+              <svg
+                class="arrow-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 15 15 5M5 5h10v10" /></svg
+            ></a>
+          </div>
+          <div
+            class="local-diagram"
+            aria-label="Your automation sends traces to local SQLite which is read by the local dashboard"
+          >
+            <div>
+              <span class="diagram-dot mint" aria-hidden="true"></span>Your
+              automation<small>Playwright / Puppeteer / custom</small>
+            </div>
+            <div class="diagram-connector" aria-hidden="true"></div>
+            <div>
+              <span class="diagram-dot pink" aria-hidden="true"></span>Local
+              trace store<small>.runlens/runlens.db</small>
+            </div>
+            <div class="diagram-connector" aria-hidden="true"></div>
+            <div>
+              <span class="diagram-dot lavender" aria-hidden="true"></span
+              >RunLens dashboard<small>127.0.0.1:5173</small>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="start" class="quickstart wrap" aria-labelledby="start-title">
+        <div class="start-intro">
+          <h2 id="start-title">
+            Give your next run<br />a little more context.
+          </h2>
+          <p>
+            Build RunLens from source, try the bundled browser example and open
+            your first trace.
+          </p>
+          <a
+            class="button primary"
+            href="https://github.com/AkhilTrivediX/runlens/tree/feature/trace-dashboard-and-website#readme"
+            >Read the setup guide
+            <svg
+              class="arrow-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 15 15 5M5 5h10v10" /></svg
+          ></a>
+          <p class="requirements">
+            Node 22.13+ or Node 24+ · pnpm · Chrome for the example
+          </p>
+        </div>
+        <div class="code-panel">
+          <div class="code-header">
+            <span>Start from source</span
+            ><button
+              id="copy-setup"
+              class="copy-button"
+              aria-label="Copy setup commands"
+            >
+              Copy commands
+            </button>
+          </div>
+          <pre
+            id="setup-code"
+          ><code><span class="code-comment"># Get the release candidate</span>
+git clone --branch feature/trace-dashboard-and-website \
+  https://github.com/AkhilTrivediX/runlens.git
+cd runlens
+pnpm install
+pnpm build
+
+<span class="code-comment"># Capture a browser run, then inspect it</span>
+pnpm test:playwright
+pnpm start:dashboard</code></pre>
+          <div class="code-footer">
+            Open <code>http://127.0.0.1:5173</code> after the server starts.
+          </div>
+          <p id="copy-status" class="copy-status" role="status"></p>
+        </div>
+      </section>
+      <section class="faq wrap" aria-labelledby="faq-title">
+        <h2 id="faq-title">A few things to know.</h2>
+        <div class="faq-items">
+          <details>
+            <summary>Does RunLens replace Playwright or Puppeteer?</summary>
+            <p>
+              No. RunLens instruments your existing workflow. Use the browser
+              tools you already have and wrap the meaningful actions in RunLens
+              steps.
+            </p>
+          </details>
+          <details>
+            <summary>Can I install it from npm?</summary>
+            <p>
+              The 0.1.0 package is being prepared for release. For now, build
+              from the source using the quickstart above. The repository has
+              instructions for packing and installing the SDK locally.
+            </p>
+          </details>
+          <details>
+            <summary>What gets captured?</summary>
+            <p>
+              Runs, steps, timing, selectors, browser events and classified
+              failures. Browser adapters collect console and page errors plus
+              failed requests. With debugger mode and a page context provider,
+              RunLens can capture screenshots and DOM snapshots on failure.
+            </p>
+          </details>
+          <details>
+            <summary>Is this a hosted dashboard?</summary>
+            <p>
+              This website introduces the product. The RunLens dashboard runs
+              locally and reads your SQLite trace store. Your local runs are not
+              sent to this website.
+            </p>
+          </details>
+        </div>
+      </section>
+      <section class="closing wrap">
+        <h2>Trace the fault.<br /><span>Keep the whole picture.</span></h2>
+        <a class="button primary" href="#start"
+          >Get started with RunLens
+          <svg
+            class="arrow-icon"
+            width="16"
+            height="16"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 15 15 5M5 5h10v10" /></svg
+        ></a>
+      </section>
+    </main>
+    <footer class="wrap">
+      <a class="brand" href="#"
+        ><img src="/favicon.svg" width="26" height="26" alt="" />runlens<span
+          >.</span
+        ></a
+      ><span>Browser automation, in focus.</span>
+      <div>
+        <a
+          href="https://github.com/AkhilTrivediX/runlens/tree/feature/trace-dashboard-and-website"
+          >Source</a
+        ><a
+          href="https://github.com/AkhilTrivediX/runlens/blob/feature/trace-dashboard-and-website/LICENSE"
+          >MIT licence</a
+        ><a href="mailto:akhiltrivedix@gmail.com">Contact</a>
+      </div>
+    </footer>
+  </body>
+</html>
