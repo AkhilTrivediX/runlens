@@ -282,4 +282,3 @@ Evidence uses real artifact previews with captions and links. Preview crops alig
 - **Don't** use outcome colour without a status label or accessible icon label.
 - **Don't** make supporting text paler than the final muted token.
 - **Don't** separate step evidence from the selected execution context.
-
