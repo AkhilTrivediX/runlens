@@ -4,6 +4,7 @@ dist/
 .next/
 .vite/
 coverage/
+.vercel/
 .impeccable/review/
 *.tsbuildinfo
 
