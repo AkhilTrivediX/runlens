@@ -20,7 +20,7 @@ From this repository today:
 
 ```bash
 pnpm --filter runlens pack --pack-destination ./dist-packages
-pnpm add ../runlens/dist-packages/runlens-0.0.0.tgz
+pnpm add ../runlens/dist-packages/runlens-0.1.0.tgz
 ```
 
 ## 30-second quickstart

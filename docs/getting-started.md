@@ -30,7 +30,7 @@ pnpm --filter runlens pack --pack-destination ./dist-packages
 Install the tarball in your project:
 
 ```bash
-pnpm add ../runlens/dist-packages/runlens-0.0.0.tgz
+pnpm add ../runlens/dist-packages/runlens-0.1.0.tgz
 ```
 
 Start the dashboard from your own project:
