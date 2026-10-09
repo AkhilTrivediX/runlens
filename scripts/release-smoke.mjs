@@ -27,7 +27,7 @@ npm(["install", join(consumer, tarball), "--offline", "--ignore-scripts", "--no-
 writeFileSync(join(consumer, "check.mjs"), `
 import assert from "node:assert/strict";
 import { execFileSync, spawn } from "node:child_process";
-import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { createRunLens } from "runlens";
 import { instrumentPlaywrightPage } from "runlens/adapters/playwright";
@@ -39,6 +39,8 @@ const installed = resolve("node_modules/runlens");
 const packageJson = JSON.parse(readFileSync(resolve(installed, "package.json"), "utf8"));
 assert.equal(Object.keys(packageJson.dependencies ?? {}).length, 0);
 assert.equal(packageJson.author.email, "akhiltrivedix@gmail.com");
+assert.equal(packageJson.bin.runlens, "dist/cli.js");
+assert(existsSync(resolve("node_modules/.bin/runlens" + (process.platform === "win32" ? ".cmd" : ""))), "Installed CLI shim must exist");
 process.chdir(mkdtempSync(resolve("verification-")));
 const dbPath = resolve("traces/runlens.db");
 const trace = createRunLens({ project: "release", storage: { type: "sqlite", path: dbPath } });
