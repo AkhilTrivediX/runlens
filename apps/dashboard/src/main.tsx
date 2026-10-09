@@ -300,39 +300,7 @@ function App() {
             Reliability
           </button>
         </nav>
-        <div className="projectNav">
-          <h2>
-            Projects <span>{projects.length}</span>
-          </h2>
-          {projects.map((name, index) => (
-            <button
-              key={name}
-              className={
-                project === name && view === "explore"
-                  ? "projectLink chosen"
-                  : "projectLink"
-              }
-              onClick={() => {
-                setView("explore");
-                setProject(name);
-                setQuery("");
-                setStatus("all");
-              }}
-            >
-              <span className={`projectDot tone${index % 3}`} />
-              <span>{name}</span>
-              <span>{runs.filter((run) => run.project === name).length}</span>
-            </button>
-          ))}
-        </div>
         <div className="navigationFoot">
-          <div className="localNote">
-            <ShieldCheck size={17} />
-            <div>
-              <strong>Your traces stay here.</strong>
-              <p>Stored on this machine.</p>
-            </div>
-          </div>
           <a
             href="https://github.com/AkhilTrivediX/runlens/blob/main/docs/getting-started.md"
             target="_blank"
@@ -342,9 +310,6 @@ function App() {
             Documentation
             <ArrowUpRight size={14} />
           </a>
-          <span className="version">
-            RunLens 0.1.0<span>Local edition</span>
-          </span>
         </div>
       </aside>
       <section className="mainContent" id="main-content">
@@ -378,28 +343,6 @@ function App() {
             </button>
           </div>
         </header>
-        <div className="pageHeading">
-          <div>
-            <h1>
-              {view === "explore"
-                ? "Every run tells a story."
-                : "Know where reliability breaks."}
-            </h1>
-            <p>
-              {view === "explore"
-                ? "Follow the steps. Find the failure. See what the browser saw."
-                : "Patterns across your stored runs, steps and selectors."}
-            </p>
-          </div>
-          <button
-            className={`followButton ${follow ? "following" : ""}`}
-            onClick={() => setFollow(!follow)}
-            aria-pressed={follow}
-          >
-            {follow ? <Pause size={14} /> : <Play size={14} />}{" "}
-            {follow ? "Following runs" : "Follow runs"}
-          </button>
-        </div>
         {error && (
           <div className="errorNotice" role="alert">
             <XCircle size={18} />
@@ -416,40 +359,58 @@ function App() {
             </button>
           </div>
         )}
-        <div className="healthRibbon" aria-label="All stored run metrics">
-          <div className="ribbonTitle">
-            <Activity size={18} />
-            <strong>Workspace health</strong>
-            <span>All stored runs</span>
+        <section className="overview">
+          <div className="pageHeading">
+            <div>
+              <h1>
+                {view === "explore" ? "Trace the fault." : "Find the pattern."}
+              </h1>
+              <p>
+                {view === "explore"
+                  ? "A run, its breaking point and the evidence behind it."
+                  : "Patterns across your stored runs, steps and selectors."}
+              </p>
+            </div>
+            <button
+              className={`followButton ${follow ? "following" : ""}`}
+              onClick={() => setFollow(!follow)}
+              aria-pressed={follow}
+            >
+              {follow ? <Pause size={14} /> : <Play size={14} />}{" "}
+              {follow ? "Following runs" : "Follow runs"}
+            </button>
           </div>
-          <div>
-            <span>Success rate</span>
-            <strong>
-              {metrics?.totalRuns ? `${metrics.successRate}%` : "—"}
-            </strong>
+          <div className="healthRibbon" aria-label="All stored run metrics">
+            <div className="ribbonTitle">
+              <Activity size={18} />
+              <strong>Workspace health</strong>
+              <span>All stored runs</span>
+            </div>
+            <div>
+              <span>Success rate</span>
+              <strong>
+                {metrics?.totalRuns ? `${metrics.successRate}%` : "—"}
+              </strong>
+            </div>
+            <div>
+              <span>Passed</span>
+              <strong className="successText">
+                {metrics?.passedRuns ?? "—"}
+              </strong>
+            </div>
+            <button onClick={() => investigate()}>
+              <span>Failed</span>
+              <strong className="failureText">
+                {metrics?.failedRuns ?? "—"}
+                <ArrowUpRight size={15} />
+              </strong>
+            </button>
+            <div>
+              <span>Total runs</span>
+              <strong>{metrics?.totalRuns ?? "—"}</strong>
+            </div>
           </div>
-          <div>
-            <span>Passed</span>
-            <strong className="successText">
-              {metrics?.passedRuns ?? "—"}
-            </strong>
-          </div>
-          <button onClick={() => investigate()}>
-            <span>Failed</span>
-            <strong className="failureText">
-              {metrics?.failedRuns ?? "—"}
-              <ArrowUpRight size={15} />
-            </strong>
-          </button>
-          <div>
-            <span>Total runs</span>
-            <strong>{metrics?.totalRuns ?? "—"}</strong>
-          </div>
-        </div>
-        {view === "reliability" ? (
-          <Reliability metrics={metrics} investigate={investigate} />
-        ) : (
-          <>
+          {view === "explore" && (
             <RunHistory
               runs={runs.slice(0, 40)}
               selectedId={selectedId}
@@ -458,6 +419,12 @@ function App() {
                 setSelectedId(id);
               }}
             />
+          )}
+        </section>
+        {view === "reliability" ? (
+          <Reliability metrics={metrics} investigate={investigate} />
+        ) : (
+          <>
             <div className="filterBar">
               <label className="searchBox">
                 <Search size={17} />

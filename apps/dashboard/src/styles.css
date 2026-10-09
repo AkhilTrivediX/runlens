@@ -1,24 +1,27 @@
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/fonts/bricolage-grotesque.ttf") format("truetype");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
 :root {
-  font-family:
-    Segoe UI,
-    Helvetica,
-    Arial,
-    sans-serif;
-  color: #243549;
-  background: #eef1f4;
+  font-family: "Bricolage Grotesque", sans-serif;
+  color: #262529;
+  background: #f2f1ee;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  --ink: #203249;
-  --muted: #526276;
-  --line: #dce3ea;
-  --accent: #255bd2;
-  --accent-wash: #edf3ff;
+  --ink: #29282d;
+  --muted: #66616b;
+  --line: #dedbdc;
+  --accent: #6344c5;
+  --accent-wash: #f0eafa;
   --surface: #fff;
-  --nav: #182d49;
-  --pass: #25715c;
-  --fail: #b34a2a;
-  --fail-wash: #fff3eb;
-  --radius: 14px;
+  --nav: #ffffff;
+  --pass: #267163;
+  --fail: #b52e57;
+  --fail-wash: #fceef3;
+  --radius: 8px;
   font-size: 14px;
 }
 * {
@@ -59,11 +62,11 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 summary:focus-visible {
-  outline: 3px solid #8aacf4;
+  outline: 3px solid #a98eea;
   outline-offset: 3px;
 }
 ::selection {
-  background: #c5d7ff;
+  background: #ded1fa;
   color: #102947;
 }
 input {
@@ -96,17 +99,6 @@ h4 {
   font-weight: 650;
 }
 code,
-pre,
-.stepDuration,
-.stepIndex,
-.runId,
-.historyAxis {
-  font-family:
-    Cascadia Code,
-    Consolas,
-    monospace;
-}
-code,
 pre {
   overflow-wrap: anywhere;
 }
@@ -136,232 +128,6 @@ button:hover {
 .skipLink:focus {
   top: 12px;
 }
-.app {
-  display: grid;
-  grid-template-columns: 218px minmax(0, 1fr);
-  min-height: 100vh;
-}
-.navigation {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: var(--nav);
-  color: #d5e0ef;
-  padding: 28px 16px 20px;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #fff;
-  font-size: 25px;
-  letter-spacing: -0.04em;
-  font-weight: 650;
-  padding: 0 9px;
-}
-.brandMark {
-  width: 33px;
-  height: 33px;
-}
-.brandMark svg {
-  width: 32px;
-  height: 32px;
-  fill: none;
-  stroke: #a5c4f3;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-}
-.brandDot {
-  color: #95bafa;
-}
-.workspaceLabel {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 20px 8px 25px;
-  margin-top: 17px;
-  border-bottom: 1px solid #334863;
-}
-.workspaceIcon {
-  display: grid;
-  place-items: center;
-  width: 31px;
-  height: 31px;
-  background: #2b4260;
-  border-radius: 8px;
-}
-.workspaceLabel strong {
-  display: block;
-  color: #edf4ff;
-  font-size: 13px;
-  font-weight: 600;
-}
-.workspaceLabel div > span {
-  display: block;
-  font-size: 12px;
-  margin-top: 4px;
-  color: #a9bdd6;
-}
-.navigation nav {
-  display: grid;
-  gap: 6px;
-  margin-top: 23px;
-}
-.navItem {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 11px 12px;
-  border-radius: 8px;
-  text-align: left;
-  color: #becde1;
-  font-size: 13px;
-}
-.navItem:hover {
-  background: #263f5e;
-  color: #fff;
-}
-.navItem.active {
-  background: #e4edfc;
-  color: #1d3b64;
-  font-weight: 650;
-}
-.navCount {
-  margin-left: auto;
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
-}
-.projectNav {
-  margin-top: 31px;
-}
-.projectNav h2 {
-  font-size: 12px;
-  color: #aec1db;
-  font-weight: 500;
-  margin: 0 11px 12px;
-  display: flex;
-  justify-content: space-between;
-}
-.projectLink {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 9px;
-  text-align: left;
-  font-size: 12px;
-  padding: 10px;
-  border-radius: 7px;
-  color: #c3d1e4;
-}
-.projectLink span:nth-child(2) {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  flex: 1;
-}
-.projectLink span:last-child {
-  color: #a9bdd6;
-  font-variant-numeric: tabular-nums;
-}
-.projectLink:hover,
-.projectLink.chosen {
-  background: #2a4260;
-  color: #fff;
-}
-.projectDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #a6c2e7;
-  flex-shrink: 0;
-}
-.projectDot.tone1 {
-  background: #89c9b9;
-}
-.projectDot.tone2 {
-  background: #dab794;
-}
-.navigationFoot {
-  margin-top: auto;
-  padding: 28px 8px 0;
-}
-.localNote {
-  display: flex;
-  align-items: flex-start;
-  gap: 9px;
-  padding-bottom: 20px;
-  color: #b9cce4;
-}
-.localNote strong {
-  font-size: 12px;
-  font-weight: 550;
-}
-.localNote p {
-  font-size: 12px;
-  margin-top: 5px;
-  color: #a7bdd9;
-}
-.navigationFoot a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  padding: 13px 0;
-  border-top: 1px solid #334863;
-}
-.navigationFoot a svg:last-child {
-  margin-left: auto;
-}
-.navigationFoot a:hover {
-  color: #fff;
-}
-.version {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  color: #a5b9d3;
-  padding-top: 16px;
-}
-.mainContent {
-  min-width: 0;
-  padding: 0 30px;
-  max-width: 1900px;
-  width: 100%;
-  margin: 0 auto;
-}
-.appHeader {
-  height: 67px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--line);
-}
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  color: var(--muted);
-  font-size: 13px;
-}
-.breadcrumb strong {
-  font-weight: 550;
-  color: var(--ink);
-}
-.headerActions {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-.storeState {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--muted);
-  font-size: 12px;
-}
 .statusDot {
   height: 6px;
   width: 6px;
@@ -382,114 +148,8 @@ button:hover {
 .iconButton:hover {
   background: #e0e7ee;
 }
-.pageHeading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 30px 0 25px;
-}
-.pageHeading p {
-  font-size: 13px;
-  color: var(--muted);
-  margin-top: 9px;
-  line-height: 1.5;
-}
-.followButton {
-  flex-shrink: 0;
-  border: 1px solid #cad4e0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: 7px;
-  background: #fff;
-  font-size: 13px;
-  padding: 9px 12px;
-}
-.followButton.following {
-  background: var(--accent-wash);
-  color: var(--accent);
-  border-color: #bfd1f4;
-}
-.healthRibbon {
-  display: flex;
-  align-items: stretch;
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-  min-height: 70px;
-}
-.healthRibbon > div:not(.ribbonTitle),
-.healthRibbon > button {
-  padding: 13px 22px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-left: 1px solid var(--line);
-  text-align: left;
-  gap: 6px;
-}
-.healthRibbon span {
-  font-size: 11px;
-  color: var(--muted);
-}
-.healthRibbon strong {
-  font-size: 20px;
-  line-height: 1;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-.ribbonTitle {
-  display: grid;
-  grid-template-columns: 21px 1fr;
-  gap: 6px 8px;
-  align-content: center;
-  padding: 17px 24px;
-  min-width: 235px;
-}
-.ribbonTitle svg {
-  grid-row: span 2;
-  color: #54779d;
-  align-self: center;
-}
-.ribbonTitle strong {
-  font-size: 13px;
-}
-.ribbonTitle span {
-  font-size: 11px;
-}
-.healthRibbon > button:hover {
-  background: var(--fail-wash);
-}
-.healthRibbon .failureText {
-  display: flex;
-  gap: 7px;
-  align-items: center;
-  color: var(--fail);
-}
 .successText {
   color: var(--pass);
-}
-.runHistory {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-  padding: 22px 0 20px;
-  border-bottom: 1px solid var(--line);
-}
-.historyIntro {
-  width: 146px;
-  flex-shrink: 0;
-}
-.historyIntro h2 {
-  font-size: 13px;
-}
-.historyIntro p {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 5px;
 }
 .legend {
   display: flex;
@@ -513,67 +173,6 @@ button:hover {
 .legend i.failed {
   background: var(--fail);
 }
-.historyChart {
-  flex: 1;
-  min-width: 0;
-}
-.historyBars {
-  display: flex;
-  align-items: flex-end;
-  height: 60px;
-  gap: 5px;
-  border-bottom: 1px solid #cbd5df;
-}
-.historyBar {
-  flex: 1;
-  max-width: 30px;
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-  position: relative;
-  border-radius: 4px 4px 0 0;
-  padding: 2px 3px 0;
-  min-width: 0;
-}
-.historyBar span {
-  width: 100%;
-  background: #88aea7;
-  border-radius: 3px 3px 0 0;
-  min-height: 8px;
-}
-.historyBar.failed span {
-  background: #c97b5b;
-}
-.historyBar.running span {
-  background: #789bdd;
-}
-.historyBar.cancelled span {
-  background: #8a96a4;
-}
-.historyBar:hover {
-  background: #dde6ed;
-}
-.historyBar.selected {
-  background: #d3e2fa;
-}
-.historyBar.selected:after {
-  content: "";
-  position: absolute;
-  top: -7px;
-  left: calc(50% - 2px);
-  height: 4px;
-  width: 4px;
-  background: var(--accent);
-  border-radius: 50%;
-}
-.historyAxis {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  color: var(--muted);
-  padding-top: 6px;
-  gap: 12px;
-}
 .filterBar {
   display: flex;
   align-items: center;
@@ -585,7 +184,7 @@ button:hover {
   align-items: center;
   gap: 8px;
   background: #fff;
-  border: 1px solid #cdd7e1;
+  border: 1px solid #d7d2db;
   border-radius: 8px;
   padding: 9px 10px;
   flex: 1;
@@ -608,7 +207,7 @@ button:hover {
   color: var(--ink);
 }
 .searchBox input::placeholder {
-  color: #526276;
+  color: #66616b;
 }
 .searchBox button {
   display: grid;
@@ -638,7 +237,7 @@ button:hover {
   border-radius: 5px;
   white-space: nowrap;
   font-size: 12px;
-  color: #586b80;
+  color: #514b5a;
 }
 .statusFilters .selected {
   background: #fff;
@@ -648,7 +247,7 @@ button:hover {
 }
 .statusFilters button > span {
   font-size: 10px;
-  color: #607185;
+  color: #514b5a;
   background: #dce5ed;
   padding: 1px 4px;
   border-radius: 3px;
@@ -664,7 +263,7 @@ button:hover {
 .projectSelect select {
   appearance: none;
   padding: 10px 29px 10px 12px;
-  border: 1px solid #cdd7e1;
+  border: 1px solid #d7d2db;
   border-radius: 8px;
   font-size: 12px;
   background: #fff;
@@ -739,7 +338,7 @@ button:hover {
   background: #f4f7fb;
 }
 .ledgerRow.selected {
-  background: #edf3ff;
+  background: #f0eafa;
 }
 .ledgerRow.selected:after {
   content: "";
@@ -1039,7 +638,7 @@ button:hover {
   background: #f3f6fa;
 }
 .waterfallRow.selected {
-  background: #edf3ff;
+  background: #f0eafa;
 }
 .waterfallRow.failed.selected {
   background: #fff0e5;
@@ -1063,7 +662,7 @@ button:hover {
 }
 .stepIndex {
   font-size: 8px;
-  color: #526276;
+  color: #66616b;
   flex-shrink: 0;
 }
 .waterfallTrack {
@@ -1079,11 +678,11 @@ button:hover {
   top: 3px;
   bottom: 3px;
   border-radius: 2px;
-  background: #73a897;
+  background: #67a294;
   min-width: 2px;
 }
 .waterfallRow.failed .waterfallBar {
-  background: #cc7d5a;
+  background: #cb6985;
 }
 .waterfallRow.running .waterfallBar {
   background: #759ae5;
@@ -1155,7 +754,7 @@ button:hover {
   padding-top: 3px;
 }
 .selectorLine code {
-  background: #edf1f5;
+  background: #eeeaf1;
   border-radius: 4px;
   font-size: 11px;
   padding: 3px 6px;
@@ -1316,7 +915,7 @@ button:hover {
 .severity {
   font-size: 10px;
   text-transform: capitalize;
-  background: #edf1f5;
+  background: #eeeaf1;
   color: #526479;
   padding: 3px 5px;
   border-radius: 4px;
@@ -1559,7 +1158,7 @@ button:hover {
 .skeleton > div {
   height: 58px;
   margin-bottom: 15px;
-  background: #edf1f5;
+  background: #eeeaf1;
   border-radius: 7px;
 }
 .skeleton > div:nth-child(2) {
@@ -1588,32 +1187,11 @@ button:hover {
   .waterfallRow {
     grid-template-columns: minmax(230px, 0.8fr) minmax(200px, 1.2fr) 65px;
   }
-  .mainContent {
-    padding: 0 45px;
-  }
   .ledgerRows {
     max-height: 830px;
   }
 }
 @media (max-width: 1250px) {
-  .app {
-    grid-template-columns: 185px minmax(0, 1fr);
-  }
-  .navigation {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  .mainContent {
-    padding: 0 22px;
-  }
-  .healthRibbon > div:not(.ribbonTitle),
-  .healthRibbon > button {
-    padding: 14px;
-  }
-  .ribbonTitle {
-    min-width: 180px;
-    padding: 16px;
-  }
   .filterBar {
     flex-wrap: wrap;
     gap: 10px;
@@ -1664,99 +1242,13 @@ button:hover {
   .eventStream p {
     grid-column: 1;
   }
-  .historyIntro {
-    width: 130px;
-  }
-  .runHistory {
-    gap: 18px;
-  }
   .projectSelect {
     max-width: 200px;
   }
 }
 @media (max-width: 1000px) {
-  .app {
-    grid-template-columns: 155px minmax(0, 1fr);
-  }
-  .navigation {
-    padding-top: 23px;
-  }
-  .brand {
-    font-size: 22px;
-    gap: 5px;
-    padding: 0 5px;
-  }
-  .brandMark,
-  .brandMark svg {
-    width: 27px;
-    height: 27px;
-  }
-  .workspaceLabel {
-    padding: 16px 5px;
-    gap: 5px;
-  }
-  .workspaceIcon {
-    display: none;
-  }
-  .navigation nav {
-    margin-top: 17px;
-  }
-  .navItem {
-    font-size: 12px;
-    gap: 7px;
-    padding: 10px 7px;
-  }
-  .navItem svg {
-    width: 15px;
-  }
-  .projectLink {
-    padding: 9px 5px;
-    font-size: 11px;
-  }
-  .navigationFoot {
-    padding: 20px 5px 0;
-  }
-  .localNote {
-    gap: 6px;
-  }
-  .localNote strong,
-  .localNote p {
-    font-size: 11px;
-  }
-  .version {
-    flex-direction: column;
-    gap: 5px;
-  }
   .investigation {
     grid-template-columns: minmax(230px, 0.4fr) minmax(0, 0.6fr);
-  }
-  .healthRibbon {
-    flex-wrap: wrap;
-  }
-  .ribbonTitle {
-    width: 100%;
-    border-bottom: 1px solid var(--line);
-    display: flex;
-    min-width: 0;
-    gap: 8px;
-    padding: 11px 15px;
-  }
-  .ribbonTitle span {
-    margin-left: auto;
-  }
-  .healthRibbon > div:not(.ribbonTitle),
-  .healthRibbon > button {
-    min-width: 0;
-    padding: 13px;
-  }
-  .healthRibbon > div:nth-child(2) {
-    border-left: 0;
-  }
-  .pageHeading {
-    padding-top: 23px;
-  }
-  .pageHeading h1 {
-    font-size: 26px;
   }
   .runFacts {
     gap: 10px;
@@ -1811,88 +1303,8 @@ button:hover {
   .artifactGallery {
     grid-template-columns: 1fr;
   }
-  .historyBars {
-    gap: 3px;
-  }
-  .historyBar {
-    padding-left: 1px;
-    padding-right: 1px;
-  }
-  .historyAxis span:nth-child(2) {
-    font-size: 8px;
-  }
 }
 @media (max-width: 760px) {
-  .app {
-    grid-template-columns: 1fr;
-  }
-  .navigation {
-    position: static;
-    top: auto;
-    height: auto;
-    padding: 13px 18px;
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-  }
-  .brand {
-    font-size: 22px;
-    flex-shrink: 0;
-  }
-  .workspaceLabel,
-  .projectNav,
-  .navigationFoot {
-    display: none;
-  }
-  .navigation nav {
-    margin: 0 0 0 auto;
-    display: flex;
-    gap: 5px;
-  }
-  .navItem {
-    white-space: nowrap;
-    font-size: 12px;
-    padding: 8px;
-  }
-  .navItem svg {
-    width: 15px;
-  }
-  .navCount {
-    display: none;
-  }
-  .mainContent {
-    padding: 0 18px;
-  }
-  .appHeader {
-    height: 51px;
-  }
-  .storeState {
-    font-size: 11px;
-  }
-  .breadcrumb {
-    font-size: 11px;
-    gap: 6px;
-  }
-  .headerActions {
-    gap: 5px;
-  }
-  .pageHeading {
-    padding: 24px 0 21px;
-    align-items: flex-start;
-  }
-  .pageHeading h1 {
-    font-size: 25px;
-    max-width: 17ch;
-  }
-  .pageHeading p {
-    font-size: 12px;
-    max-width: 38ch;
-  }
-  .followButton {
-    font-size: 11px;
-    padding: 8px;
-    gap: 5px;
-  }
   .investigation {
     grid-template-columns: 1fr;
   }
@@ -1916,37 +1328,8 @@ button:hover {
   .runName > span {
     display: none;
   }
-  .runHistory {
-    gap: 16px;
-    padding-top: 19px;
-    padding-bottom: 18px;
-  }
-  .historyIntro {
-    width: 105px;
-  }
-  .historyIntro p {
-    font-size: 10px;
-  }
   .legend {
     gap: 9px;
-    font-size: 10px;
-  }
-  .historyAxis span:nth-child(2) {
-    display: none;
-  }
-  .historyBars {
-    height: 54px;
-  }
-  .healthRibbon strong {
-    font-size: 18px;
-  }
-  .healthRibbon span {
-    font-size: 10px;
-  }
-  .ribbonTitle strong {
-    font-size: 12px;
-  }
-  .ribbonTitle span {
     font-size: 10px;
   }
   .waterfallScale,
@@ -2019,45 +1402,6 @@ button:hover {
   }
 }
 @media (max-width: 420px) {
-  .mainContent {
-    padding: 0 14px;
-  }
-  .navigation {
-    padding: 12px 14px;
-    gap: 6px;
-  }
-  .navItem {
-    font-size: 11px;
-    padding: 7px 6px;
-    gap: 5px;
-  }
-  .brand {
-    font-size: 20px;
-    padding: 0;
-  }
-  .brandMark,
-  .brandMark svg {
-    height: 24px;
-    width: 24px;
-  }
-  .breadcrumb > strong {
-    font-size: 10px;
-  }
-  .storeState {
-    font-size: 10px;
-  }
-  .pageHeading h1 {
-    font-size: 23px;
-  }
-  .pageHeading {
-    gap: 10px;
-  }
-  .followButton {
-    font-size: 10px;
-  }
-  .followButton svg {
-    width: 12px;
-  }
   .searchBox {
     min-width: 150px;
     padding: 9px 8px;
@@ -2073,25 +1417,6 @@ button:hover {
     font-size: 11px;
     padding: 7px 5px;
     gap: 5px;
-  }
-  .historyIntro {
-    width: 95px;
-  }
-  .runHistory {
-    gap: 8px;
-  }
-  .historyBar {
-    padding: 0;
-  }
-  .historyBars {
-    gap: 2px;
-  }
-  .healthRibbon > div:not(.ribbonTitle),
-  .healthRibbon > button {
-    padding: 12px 10px;
-  }
-  .healthRibbon strong {
-    font-size: 17px;
   }
   .inspectorBody {
     padding: 17px;
@@ -2191,4 +1516,963 @@ button:hover {
 }
 .eventStream details[open] .eventChevron {
   transform: rotate(90deg);
+}
+/* Signal desk: a continuous workspace with an integrated run instrument. */
+.app {
+  display: block;
+  min-height: 100vh;
+}
+.navigation {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  padding: 0 36px;
+  background: #fff;
+  border-bottom: 1px solid #dedbdc;
+  color: #29282d;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 31px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  flex-shrink: 0;
+  color: #29282d;
+}
+.brandMark {
+  display: grid;
+  place-items: center;
+  width: 33px;
+  height: 33px;
+  background: #6344c5;
+  border-radius: 9px;
+  transform: rotate(-5deg);
+}
+.brandMark svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+.brandDot {
+  color: #6344c5;
+}
+.navigation nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  order: 1;
+}
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 550;
+  padding: 10px 13px;
+  border-radius: 6px;
+  color: #66616b;
+  white-space: nowrap;
+}
+.navItem:hover {
+  background: #f4f1f8;
+  color: #6344c5;
+}
+.navItem.active {
+  background: #eee7fb;
+  color: #5435ac;
+  font-weight: 650;
+}
+.navCount {
+  font-size: 11px;
+  line-height: 1;
+  background: #dcd0f4;
+  color: #5435ac;
+  padding: 4px 5px;
+  border-radius: 3px;
+}
+.workspaceLabel {
+  order: 2;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  margin-left: auto;
+  color: #66616b;
+}
+.workspaceLabel strong {
+  font-size: 12px;
+  font-weight: 600;
+  display: block;
+  color: #29282d;
+}
+.workspaceLabel div > span {
+  display: block;
+  font-size: 10px;
+  margin-top: 3px;
+}
+.workspaceIcon {
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  background: #eeeaf1;
+  border-radius: 5px;
+}
+.navigationFoot {
+  order: 3;
+}
+.navigationFoot a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #66616b;
+}
+.navigationFoot a:hover {
+  color: #6344c5;
+}
+.mainContent {
+  max-width: 1680px;
+  min-width: 0;
+  margin: auto;
+  padding: 0 36px;
+}
+.appHeader {
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #66616b;
+}
+.breadcrumb strong {
+  color: #29282d;
+  font-weight: 550;
+}
+.headerActions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.storeState {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #66616b;
+  font-size: 11px;
+}
+.overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(430px, 1.15fr);
+  grid-template-rows: 1fr auto;
+  gap: 0 32px;
+  padding: 18px 0 26px;
+  align-items: center;
+}
+.pageHeading {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  justify-content: space-between;
+  grid-column: 1;
+  grid-row: 1;
+  padding-bottom: 23px;
+}
+.pageHeading h1 {
+  font-size: 52px;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+.pageHeading p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #66616b;
+  margin-top: 13px;
+  max-width: 38ch;
+}
+.followButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  background: #fff;
+  border: 1px solid #d7d2db;
+  padding: 9px 11px;
+  border-radius: 6px;
+  font-size: 11px;
+  margin-top: 8px;
+  color: #514958;
+}
+.followButton.following {
+  background: #eee7fb;
+  border-color: #c1afe5;
+  color: #5435ac;
+}
+.healthRibbon {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  gap: 0;
+  align-items: center;
+  border-top: 1px solid #d7d2db;
+  padding-top: 18px;
+  min-width: 0;
+}
+.ribbonTitle {
+  display: none;
+}
+.healthRibbon > div:not(.ribbonTitle),
+.healthRibbon > button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  text-align: left;
+  min-width: 0;
+  padding: 0 15px;
+  border-right: 1px solid #d7d2db;
+}
+.healthRibbon > div:nth-child(2) {
+  padding-left: 0;
+}
+.healthRibbon > div:last-child {
+  border-right: 0;
+}
+.healthRibbon span {
+  font-size: 11px;
+  color: #66616b;
+}
+.healthRibbon strong {
+  font-size: 29px;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.healthRibbon .failureText {
+  color: #b52e57;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.healthRibbon .successText {
+  color: #267163;
+}
+.runHistory {
+  grid-column: 2;
+  grid-row: 1/3;
+  background: #332849;
+  color: #fff;
+  padding: 23px 25px 18px;
+  border-radius: 11px;
+  position: relative;
+  min-height: 181px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  overflow: hidden;
+}
+.historyIntro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.historyIntro h2 {
+  font-size: 15px;
+  font-weight: 550;
+}
+.historyIntro p {
+  font-size: 10px;
+  color: #d3c8e3;
+}
+.legend {
+  margin: 0;
+  color: #e2d7ef;
+}
+.legend i {
+  background: #a8dacd;
+}
+.legend i.failed {
+  background: #eea4bf;
+}
+.historyChart {
+  min-width: 0;
+  width: 100%;
+}
+.historyBars {
+  height: 70px;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  border-bottom: 1px solid #78628f;
+}
+.historyBar {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  min-width: 0;
+  padding: 0 1px 0;
+  position: relative;
+  border-radius: 3px;
+}
+.historyBar span {
+  width: 100%;
+  display: block;
+  min-height: 8px;
+  border-radius: 2px 2px 0 0;
+  background: #a8dacd;
+}
+.historyBar.failed span {
+  background: #eea4bf;
+}
+.historyBar.running span {
+  background: #c1b1f4;
+}
+.historyBar.cancelled span {
+  background: #bdb6c7;
+}
+.historyBar:hover {
+  background: #665477;
+}
+.historyBar.selected {
+  background: #665477;
+}
+.historyBar.selected:after {
+  content: "";
+  position: absolute;
+  height: 4px;
+  width: 4px;
+  background: #fff;
+  top: -8px;
+  left: calc(50% - 2px);
+  border-radius: 50%;
+}
+.historyAxis {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 8px;
+  color: #d3c8e3;
+  font-size: 9px;
+}
+.filterBar {
+  padding: 17px 0;
+  border-top: 1px solid #dedbdc;
+  gap: 14px;
+}
+.searchBox {
+  max-width: 360px;
+  border-radius: 6px;
+  min-height: 40px;
+}
+.statusFilters {
+  border: 0;
+  background: #e7e3eb;
+  border-radius: 6px;
+  padding: 4px;
+}
+.statusFilters .selected {
+  box-shadow: none;
+  border-radius: 4px;
+}
+.projectSelect select {
+  border-radius: 6px;
+  min-height: 40px;
+}
+.investigation {
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 0;
+  border: 1px solid #d7d2db;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+.runLedger {
+  border: 0;
+  border-right: 1px solid #d7d2db;
+  border-radius: 0;
+  background: #fbfaf8;
+}
+.sectionHeading {
+  padding: 18px 20px;
+}
+.ledgerRows {
+  max-height: 890px;
+}
+.ledgerRow {
+  min-height: 100px;
+  padding: 17px 18px;
+}
+.ledgerRow.selected {
+  background: #ede6fa;
+}
+.runName strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+.runName > span {
+  font-size: 11px;
+}
+.runMeta {
+  font-size: 11px;
+}
+.statusLabel {
+  font-size: 11px;
+}
+.runLedger > footer {
+  background: #f1eef3;
+}
+.inspector {
+  border: 0;
+  border-radius: 0;
+  min-height: 650px;
+}
+.inspectorHeader {
+  padding: 24px 28px 0;
+}
+.inspectorHeader h2 {
+  font-size: 25px;
+  font-weight: 650;
+}
+.inspectorContext > span:first-child {
+  font-size: 12px;
+}
+.inspectorToolbar {
+  margin-top: 11px;
+}
+.runFacts {
+  gap: 22px;
+  font-size: 12px;
+  padding: 20px 0;
+}
+.inspectorTabs {
+  padding: 0 28px;
+  gap: 28px;
+}
+.inspectorTabs button {
+  font-size: 13px;
+}
+.inspectorTabs button[aria-selected="true"] {
+  color: #6344c5;
+}
+.inspectorTabs button[aria-selected="true"]:after {
+  background: #6344c5;
+}
+.inspectorBody {
+  padding: 23px 28px;
+}
+.outcome {
+  border-radius: 6px;
+  padding: 16px;
+}
+.outcome strong {
+  font-size: 14px;
+}
+.outcome p {
+  font-size: 12px;
+}
+.outcome.failed strong {
+  color: #972646;
+}
+.outcome.failed p {
+  color: #804657;
+}
+.outcome.failed {
+  background: #fceef3;
+}
+.traceHeading h3 {
+  font-size: 14px;
+}
+.traceHeading > span {
+  font-size: 11px;
+}
+.waterfallScale,
+.waterfallRow {
+  grid-template-columns: minmax(200px, 0.95fr) minmax(190px, 1.3fr) 65px;
+  gap: 14px;
+}
+.waterfallRow {
+  min-height: 49px;
+}
+.stepLabel {
+  font-size: 12px;
+}
+.stepDuration {
+  font-size: 11px;
+}
+.waterfallTrack {
+  height: 20px;
+}
+.waterfallBar {
+  top: 5px;
+  bottom: 5px;
+}
+.waterfallRow.failed.selected {
+  background: #f9e6ef;
+}
+.waterfallRow.selected {
+  background: #ede6fa;
+}
+.waterfallLegend {
+  font-size: 10px;
+}
+.stepFocusTitle h3 {
+  font-size: 15px;
+}
+.stepFocusTitle > span {
+  font-size: 12px;
+}
+.selectorLine code {
+  font-size: 12px;
+}
+.selectorLine > span {
+  font-size: 12px;
+}
+.errorCode {
+  font-size: 12px;
+  background: #f6edf1;
+  color: #76394b;
+  padding: 15px;
+}
+.stepEvidence {
+  gap: 26px;
+}
+.stepEvidence h4 {
+  font-size: 13px;
+}
+.eventStream strong {
+  font-size: 12px;
+}
+.eventStream time {
+  font-size: 10px;
+}
+.eventStream p {
+  font-size: 11px;
+}
+.evidencePreview img {
+  height: 170px;
+}
+.evidencePreview > a > span {
+  font-size: 11px;
+}
+.inspectorFooter {
+  background: #f9f7fa;
+  font-size: 10px;
+}
+.pageFooter {
+  font-size: 11px;
+  padding: 20px 0 28px;
+}
+.reliabilityView {
+  margin: 12px 0 24px;
+}
+.overview:not(:has(.runHistory)) {
+  grid-template-columns: 1fr;
+}
+.overview:not(:has(.runHistory)) .pageHeading {
+  padding-bottom: 30px;
+}
+.overview:not(:has(.runHistory)) .healthRibbon {
+  max-width: 650px;
+}
+@media (min-width: 1650px) {
+  .mainContent {
+    padding: 0 48px;
+  }
+  .investigation {
+    grid-template-columns: 375px minmax(0, 1fr);
+  }
+}
+@media (max-width: 1200px) {
+  .mainContent {
+    padding: 0 24px;
+  }
+  .navigation {
+    padding: 0 24px;
+    gap: 20px;
+  }
+  .workspaceLabel {
+    display: none;
+  }
+  .navigationFoot {
+    margin-left: auto;
+  }
+  .overview {
+    grid-template-columns: 1fr 1fr;
+    gap: 0 22px;
+  }
+  .pageHeading {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pageHeading h1 {
+    font-size: 44px;
+  }
+  .pageHeading p {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  .followButton {
+    margin: 0;
+    padding: 7px 10px;
+  }
+  .runHistory {
+    min-height: 225px;
+  }
+  .historyIntro {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .historyBars {
+    height: 90px;
+  }
+  .investigation {
+    grid-template-columns: 300px minmax(0, 1fr);
+  }
+  .waterfallScale,
+  .waterfallRow {
+    grid-template-columns: minmax(150px, 1fr) minmax(100px, 1fr) 55px;
+    gap: 8px;
+  }
+  .stepLabel {
+    font-size: 11px;
+  }
+  .inspectorHeader {
+    padding: 22px 22px 0;
+  }
+  .inspectorBody {
+    padding: 21px 22px;
+  }
+  .inspectorTabs {
+    padding: 0 22px;
+    gap: 22px;
+  }
+  .inspectorHeader h2 {
+    font-size: 23px;
+  }
+  .healthRibbon strong {
+    font-size: 25px;
+  }
+  .healthRibbon > div:not(.ribbonTitle),
+  .healthRibbon > button {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+@media (max-width: 950px) {
+  .investigation {
+    grid-template-columns: 270px minmax(0, 1fr);
+  }
+  .runName strong {
+    font-size: 12px;
+  }
+  .waterfallScale,
+  .waterfallRow {
+    grid-template-columns: 1fr 50px;
+  }
+  .waterfallScale > div {
+    display: none;
+  }
+  .waterfallTrack {
+    grid-column: 1/-1;
+    grid-row: 2;
+    margin: 5px 0;
+  }
+  .stepEvidence {
+    grid-template-columns: 1fr;
+  }
+  .inspectorTabs {
+    gap: 18px;
+  }
+  .inspectorTabs button {
+    font-size: 11px;
+  }
+  .inspectorHeader h2 {
+    font-size: 21px;
+  }
+  .runFacts {
+    gap: 11px;
+    font-size: 11px;
+  }
+}
+@media (max-width: 760px) {
+  .navigation {
+    height: 65px;
+    padding: 0 18px;
+    gap: 16px;
+  }
+  .brand {
+    font-size: 27px;
+  }
+  .brandMark {
+    width: 28px;
+    height: 28px;
+  }
+  .brandMark svg {
+    width: 21px;
+    height: 21px;
+  }
+  .navItem {
+    font-size: 11px;
+    padding: 8px;
+    gap: 5px;
+  }
+  .navItem svg {
+    width: 15px;
+  }
+  .navCount {
+    display: none;
+  }
+  .navigationFoot a {
+    font-size: 0;
+    gap: 0;
+  }
+  .navigationFoot a svg:last-child {
+    display: none;
+  }
+  .navigationFoot a svg:first-child {
+    width: 19px;
+    height: 19px;
+  }
+  .mainContent {
+    padding: 0 18px;
+  }
+  .appHeader {
+    height: 48px;
+  }
+  .breadcrumb,
+  .storeState {
+    font-size: 10px;
+  }
+  .overview {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 17px 0 20px;
+  }
+  .pageHeading {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 22px;
+  }
+  .pageHeading h1 {
+    font-size: 39px;
+  }
+  .pageHeading p {
+    font-size: 12px;
+    max-width: 27ch;
+  }
+  .healthRibbon {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 17px 0 19px;
+  }
+  .healthRibbon strong {
+    font-size: 25px;
+  }
+  .healthRibbon span {
+    font-size: 10px;
+  }
+  .runHistory {
+    grid-column: 1;
+    grid-row: 3;
+    min-height: 160px;
+    padding: 19px 20px 14px;
+    gap: 19px;
+  }
+  .historyIntro {
+    flex-wrap: nowrap;
+  }
+  .historyIntro h2 {
+    font-size: 13px;
+  }
+  .historyIntro p {
+    font-size: 10px;
+  }
+  .historyBars {
+    height: 53px;
+  }
+  .historyAxis span:nth-child(2) {
+    display: none;
+  }
+  .filterBar {
+    padding: 18px 0;
+  }
+  .investigation {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .runLedger {
+    border-right: 0;
+    border-bottom: 1px solid #d7d2db;
+  }
+  .ledgerRows {
+    max-height: 315px;
+  }
+  .ledgerRow {
+    min-height: 89px;
+  }
+  .runName strong {
+    font-size: 13px;
+  }
+  .inspector {
+    min-height: 0;
+  }
+  .inspectorHeader h2 {
+    font-size: 24px;
+  }
+  .inspectorTabs button {
+    font-size: 12px;
+  }
+  .inspectorBody {
+    padding: 20px;
+  }
+  .inspectorTabs {
+    padding: 0 20px;
+  }
+  .waterfallScale,
+  .waterfallRow {
+    grid-template-columns: 1fr 1fr 55px;
+    gap: 8px;
+  }
+  .waterfallScale > div {
+    display: flex;
+  }
+  .waterfallTrack {
+    grid-column: auto;
+    grid-row: auto;
+    margin: 0;
+  }
+  .stepEvidence {
+    grid-template-columns: 1fr 1fr;
+  }
+  .errorCode {
+    font-size: 11px;
+  }
+  .pageFooter {
+    font-size: 10px;
+  }
+  .inspectorHeader {
+    padding: 22px 20px 0;
+  }
+  .sectionHeading h2 {
+    font-size: 14px;
+  }
+  .overview:not(:has(.runHistory)) .healthRibbon {
+    width: 100%;
+  }
+}
+@media (max-width: 450px) {
+  .navigation {
+    padding: 0 14px;
+    gap: 11px;
+  }
+  .brand {
+    font-size: 24px;
+    gap: 6px;
+  }
+  .navItem {
+    font-size: 10px;
+    padding: 7px 5px;
+  }
+  .navItem svg {
+    width: 13px;
+  }
+  .navigationFoot {
+    margin-left: auto;
+  }
+  .mainContent {
+    padding: 0 14px;
+  }
+  .pageHeading h1 {
+    font-size: 36px;
+  }
+  .followButton {
+    font-size: 10px;
+    padding: 8px;
+  }
+  .pageHeading p {
+    font-size: 11px;
+    max-width: 23ch;
+  }
+  .runHistory {
+    min-height: 160px;
+  }
+  .historyIntro {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .legend {
+    font-size: 10px;
+  }
+  .historyBar {
+    padding: 0;
+  }
+  .historyBars {
+    gap: 4px;
+  }
+  .healthRibbon > div:not(.ribbonTitle),
+  .healthRibbon > button {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .healthRibbon strong {
+    font-size: 23px;
+  }
+  .healthRibbon span {
+    font-size: 9px;
+  }
+  .waterfallScale,
+  .waterfallRow {
+    grid-template-columns: 1fr 48px;
+  }
+  .waterfallScale > div {
+    display: none;
+  }
+  .waterfallTrack {
+    grid-column: 1/-1;
+    grid-row: 2;
+    margin: 5px 0;
+  }
+  .stepEvidence {
+    grid-template-columns: 1fr;
+  }
+  .inspectorHeader h2 {
+    font-size: 22px;
+  }
+  .inspectorTabs {
+    gap: 19px;
+  }
+  .inspectorTabs button {
+    font-size: 11px;
+  }
+  .stepLabel {
+    font-size: 12px;
+  }
+  .runFacts {
+    font-size: 10px;
+    gap: 11px;
+  }
+  .storeState {
+    font-size: 9px;
+  }
 }
