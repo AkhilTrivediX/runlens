@@ -10,10 +10,10 @@
   },
   "packageManager": "pnpm@11.7.0",
   "engines": {
-    "node": ">=20.19"
+    "node": "^22.13.0 || >=24.0.0"
   },
   "scripts": {
-    "build": "pnpm -r --if-present build",
+    "build": "pnpm -r --if-present build && node scripts/prepare-package.mjs",
     "typecheck": "pnpm -r --if-present typecheck",
     "test": "pnpm -r --if-present test",
     "test:puppeteer": "tsx examples/puppeteer-basic/src/index.ts",
@@ -22,13 +22,19 @@
     "test:dashboard": "tsx scripts/dashboard-smoke.ts",
     "test:cli": "pnpm --filter runlens build && node packages/sdk/dist/cli.js doctor --db lab/test-runs/runlens.db",
     "smoke": "tsx scripts/smoke.ts",
-    "dev:dashboard": "pnpm --filter @runlens/core build && pnpm --filter @runlens/dashboard dev",
-    "clean:traces": "tsx scripts/clean-traces.ts"
+    "dev:dashboard": "pnpm --filter @runlens/core build && pnpm --filter runlens build && pnpm --filter @runlens/dashboard dev",
+    "clean:traces": "tsx scripts/clean-traces.ts",
+    "start:dashboard": "node packages/sdk/dist/cli.js dashboard --db lab/test-runs/runlens.db",
+    "test:release": "node scripts/release-smoke.mjs"
   },
   "devDependencies": {
     "@types/node": "^24.0.10",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
+  },
+  "author": {
+    "name": "Akhil Trivedi",
+    "email": "akhiltrivedix@gmail.com"
   }
 }

@@ -8,6 +8,8 @@ Local-first observability for browser automation reliability: runs, steps, selec
 
 ## Install
 
+Requires Node 22 (22.13+) or Node 24+. Node 24 is recommended.
+
 From npm after release:
 
 ```bash
@@ -17,8 +19,7 @@ pnpm add runlens
 From this repository today:
 
 ```bash
-pnpm --filter runlens build
-pnpm --filter runlens pack --pack-destination ../../dist-packages
+pnpm --filter runlens pack --pack-destination ./dist-packages
 pnpm add ../runlens/dist-packages/runlens-0.0.0.tgz
 ```
 
@@ -108,6 +109,16 @@ By default the dashboard reads `lab/test-runs/runlens.db`. Override it with:
 ```bash
 RUNLENS_DB=.runlens/runlens.db pnpm dev:dashboard
 ```
+
+After installing the SDK, start its packaged dashboard:
+
+```bash
+runlens dashboard --db .runlens/runlens.db --port 5173
+```
+
+This serves the dashboard and API at `http://127.0.0.1:5173`. It needs no repository checkout or Vite server.
+
+From a built repository, use `pnpm start:dashboard`.
 
 ## CLI
 
@@ -200,6 +211,7 @@ pnpm test:complex
 pnpm test:cli
 pnpm dev:dashboard
 pnpm test:dashboard
+pnpm test:release
 ```
 
 Generated traces and screenshots are written under `lab/test-runs`.
@@ -216,7 +228,7 @@ Generated traces and screenshots are written under `lab/test-runs`.
 - [ ] CI reporter mode for attaching trace bundles to GitHub Actions runs.
 - [ ] Exportable `.runlens` trace bundles for bug reports.
 - [ ] Selector health analytics with flake score, first-seen/last-seen, and suggested owners.
-- [ ] Production local dashboard server wrapper for packaged installs.
+- [x] Production local dashboard server wrapper for packaged installs.
 - [ ] Optional AI classification provider interface behind explicit user configuration.
 
 ## Developer Preview Waitlist
