@@ -2,6 +2,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { createTraceStorage, type RunTrace } from "@runlens/core";
+import { startDashboard } from "./dashboard.js";
 
 interface CliOptions {
   command: string;
@@ -9,6 +10,7 @@ interface CliOptions {
   dbPath: string;
   json: boolean;
   out?: string;
+  port?: number;
 }
 
 const options = parseArgs(process.argv.slice(2));
@@ -21,6 +23,16 @@ main(options).catch((error) => {
 async function main(input: CliOptions): Promise<void> {
   if (input.command === "help" || input.command === "--help" || input.command === "-h") {
     printHelp();
+    return;
+  }
+
+  if (input.command === "dashboard") {
+    const dashboard = await startDashboard({ dbPath: input.dbPath, port: input.port });
+    console.log(`RunLens dashboard: ${dashboard.url}`);
+    console.log(`Trace database: ${input.dbPath}`);
+    const shutdown = () => { void dashboard.close().then(() => process.exit(0)).catch((error) => { console.error(error); process.exit(1); }); };
+    process.once("SIGINT", shutdown);
+    process.once("SIGTERM", shutdown);
     return;
   }
 
@@ -105,6 +117,7 @@ function parseArgs(args: string[]): CliOptions {
   let dbPath = process.env.RUNLENS_DB ?? ".runlens/runlens.db";
   let out: string | undefined;
   let json = false;
+  let port: number | undefined;
   const commandArgs: string[] = [];
 
   for (let index = 0; index < args.length; index += 1) {
@@ -127,6 +140,12 @@ function parseArgs(args: string[]): CliOptions {
       continue;
     }
 
+    if (arg === "--port") {
+      port = Number(args[++index]);
+      if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error("--port must be an integer from 0 to 65535.");
+      continue;
+    }
+
     commandArgs.push(arg);
   }
 
@@ -135,7 +154,8 @@ function parseArgs(args: string[]): CliOptions {
     args: commandArgs.slice(1),
     dbPath: resolve(dbPath),
     json,
-    out
+    out,
+    port
   };
 }
 
@@ -196,10 +216,12 @@ Usage:
   runlens list --db .runlens/runlens.db [limit]
   runlens inspect --db .runlens/runlens.db [runId]
   runlens export --db .runlens/runlens.db --out runlens-export.json
+  runlens dashboard --db .runlens/runlens.db --port 5173
 
 Options:
   --db <path>    SQLite trace database path. Defaults to RUNLENS_DB or .runlens/runlens.db.
   --json         Print JSON for list/inspect/doctor output.
   --out <path>   Export destination for "export".
+  --port <port>  Dashboard port. Defaults to 5173. Use 0 for an available port.
 `);
 }

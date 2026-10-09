@@ -300,7 +300,7 @@ class DefaultRunSession implements RunLensRun {
       });
 
       if (this.run.mode === "debugger") {
-        await this.captureScreenshot(`${name} after`, step.id);
+        await this.captureArtifactSafely("screenshot", () => this.captureScreenshot(`${name} after`, step.id));
       }
 
       return result;
@@ -354,18 +354,26 @@ class DefaultRunSession implements RunLensRun {
         }
       });
 
-      await this.captureScreenshot(`${name} failure`, step.id);
-      if (this.run.mode === "debugger") {
-        await this.captureDomSnapshot(`${name} dom`, step.id);
-      }
-
       if (input.failRunOnError) {
         await this.failRun(failureClass, serialized.message);
+      }
+
+      await this.captureArtifactSafely("screenshot", () => this.captureScreenshot(`${name} failure`, step.id));
+      if (this.run.mode === "debugger") {
+        await this.captureArtifactSafely("dom_snapshot", () => this.captureDomSnapshot(`${name} dom`, step.id));
       }
 
       throw error;
     } finally {
       this.activeStepId = previousStepId;
+    }
+  }
+
+  private async captureArtifactSafely(type: string, capture: () => Promise<unknown>): Promise<void> {
+    try {
+      await capture();
+    } catch (error) {
+      await this.event("artifact_capture_failed", { type, error: serializeError(error) }).catch(() => {});
     }
   }
 

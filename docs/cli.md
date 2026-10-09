@@ -7,6 +7,7 @@ runlens doctor --db .runlens/runlens.db
 runlens list --db .runlens/runlens.db
 runlens inspect --db .runlens/runlens.db
 runlens export --db .runlens/runlens.db --out runlens-export.json
+runlens dashboard --db .runlens/runlens.db --port 5173
 ```
 
 ## Commands
@@ -15,6 +16,7 @@ runlens export --db .runlens/runlens.db --out runlens-export.json
 - `list`: prints recent runs.
 - `inspect`: prints a selected run, or the latest run when no id is provided.
 - `export`: writes all runs, metrics, events, issues, and artifacts metadata to JSON.
+- `dashboard`: serves the packaged dashboard and API at `http://127.0.0.1:5173`. Use `--port` to change the port.
 
 ## Environment
 

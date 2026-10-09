@@ -2,6 +2,8 @@
 
 RunLens currently ships as a monorepo with a publishable SDK package named `runlens`.
 
+Requires Node 22 (22.13+) or Node 24+. Node 24 is recommended. The SDK package includes the core runtime and dashboard assets.
+
 ## Try it locally
 
 ```bash
@@ -22,14 +24,19 @@ Open `http://127.0.0.1:5173`.
 Build a local package tarball:
 
 ```bash
-pnpm --filter runlens build
-pnpm --filter runlens pack --pack-destination ../../dist-packages
+pnpm --filter runlens pack --pack-destination ./dist-packages
 ```
 
 Install the tarball in your project:
 
 ```bash
-pnpm add ../runlens/dist-packages/runlens-0.0.0.tgz
+pnpm add ../runlens/dist-packages/runlens-0.1.0.tgz
+```
+
+Start the dashboard from your own project:
+
+```bash
+runlens dashboard --db .runlens/runlens.db
 ```
 
 ## Instrument Playwright
