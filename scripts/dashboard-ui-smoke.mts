@@ -69,6 +69,17 @@ try {
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await page.goto(server.url);
+    await page.evaluate(() => document.fonts.ready);
+    assert(
+      await page.evaluate(() =>
+        [...document.fonts].some(
+          (face) =>
+            face.family.includes("Bricolage Grotesque") &&
+            face.status === "loaded",
+        ),
+      ),
+      "Custom dashboard font must load",
+    );
     await page.getByRole("tab", { name: /Execution trace/ }).waitFor();
     await page.locator(".waterfallRow").first().waitFor();
 

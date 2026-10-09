@@ -15,7 +15,7 @@ function within(root: string, path: string): boolean {
 }
 
 function mimeType(path: string): string {
-  return ({ ".png": "image/png", ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".json": "application/json" } as Record<string, string>)[extname(path)] ?? "application/octet-stream";
+  return ({ ".png": "image/png", ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".json": "application/json", ".ttf": "font/ttf" } as Record<string, string>)[extname(path)] ?? "application/octet-stream";
 }
 
 function sendFile(response: ServerResponse, path: string): void {
