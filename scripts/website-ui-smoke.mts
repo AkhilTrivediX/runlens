@@ -1,5 +1,5 @@
 import { createRequire } from "node:module";
-import { mkdirSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { resolve, extname } from "node:path";
@@ -119,6 +119,37 @@ try {
       await page.locator("#detail-kind").textContent(),
       "selector_missing",
     );
+    await page.getByRole("button", { name: /Network failure/ }).click();
+    assert.equal(
+      await page.locator("#detail-kind").textContent(),
+      "network_failure",
+    );
+    await page.getByRole("tab", { name: "Events", exact: true }).click();
+    assert(await page.locator("#panel-events").isVisible());
+    assert(
+      (await page.locator("#event-message").textContent()).includes("503"),
+    );
+    await page.getByRole("tab", { name: "DOM", exact: true }).click();
+    assert(
+      (await page.locator("#dom-code").textContent()).includes(
+        "Try again later",
+      ),
+    );
+    await page.getByRole("button", { name: /Session expired/ }).click();
+    assert((await page.locator("#dom-code").textContent()).includes("Sign in"));
+    await page.getByRole("tab", { name: "DOM", exact: true }).press("Home");
+    assert(await page.locator("#panel-detail").isVisible());
+    await page.getByRole("button", { name: /Selector missing/ }).click();
+    await page.getByRole("button", { name: "Replay run", exact: true }).click();
+    await page.waitForFunction(
+      () =>
+        document.querySelector(".trace-demo")?.getAttribute("data-replay") ===
+        "complete",
+    );
+    assert.equal(
+      await page.locator("#detail-kind").textContent(),
+      "selector_missing",
+    );
     await page.getByRole("link", { name: "Start tracing" }).click();
     assert(new URL(page.url()).hash === "#start");
     await page.getByRole("button", { name: "Copy setup commands" }).click();
@@ -127,6 +158,29 @@ try {
         "pnpm start:dashboard",
       ),
     );
+    await page.getByRole("tab", { name: "Playwright", exact: true }).click();
+    assert(
+      (await page.locator("#setup-code").textContent()).includes(
+        "instrumentPlaywrightPage",
+      ),
+    );
+    await page.getByRole("button", { name: "Copy integration code" }).click();
+    assert(
+      (await page.evaluate(() => navigator.clipboard.readText())).includes(
+        "instrumentPlaywrightPage",
+      ),
+    );
+    await page
+      .getByRole("tab", { name: "Playwright", exact: true })
+      .press("ArrowRight");
+    assert(
+      (await page.locator("#setup-code").textContent()).includes(
+        "instrumentPuppeteerPage",
+      ),
+    );
+    await page
+      .getByRole("tab", { name: "Puppeteer", exact: true })
+      .press("Home");
     await page.getByText("Can I install it from npm?", { exact: true }).click();
     assert.equal(await page.locator("details").nth(1).getAttribute("open"), "");
     await page.getByText("Can I install it from npm?", { exact: true }).click();
@@ -155,8 +209,91 @@ try {
     });
     await context.close();
   }
+  const motion = await browser.newContext({
+    viewport: { width: 1440, height: 1000 },
+    reducedMotion: "no-preference",
+  });
+  const page = await motion.newPage();
+  await page.goto(url, { waitUntil: "networkidle" });
+  await page.waitForFunction(
+    () =>
+      document.querySelector(".trace-demo")?.getAttribute("data-replay") ===
+      "complete",
+  );
+  await page.getByRole("button", { name: "Replay run", exact: true }).click();
+  const activeAnimations = await page.evaluate(
+    () =>
+      document
+        .getAnimations()
+        .filter((animation) => animation.playState === "running").length,
+  );
+  assert(
+    activeAnimations > 0,
+    "Replay must contain visible running animations",
+  );
+  await page.getByRole("button", { name: "Pause replay", exact: true }).click();
+  assert.equal(
+    await page.locator(".trace-demo").getAttribute("data-replay"),
+    "paused",
+  );
+  await page.screenshot({
+    path: ".impeccable/review/website-replaying.png",
+    fullPage: true,
+  });
+  await page
+    .getByRole("button", { name: "Resume replay", exact: true })
+    .click();
+  await page.waitForFunction(
+    () =>
+      document.querySelector(".trace-demo")?.getAttribute("data-replay") ===
+      "complete",
+  );
+  await page.getByRole("button", { name: "Replay run", exact: true }).click();
+  await page.getByRole("button", { name: /Session expired/ }).click();
+  await page.waitForFunction(
+    () =>
+      document.querySelector(".trace-demo")?.getAttribute("data-replay") ===
+      "complete",
+  );
+  assert.equal(
+    await page.locator("#detail-kind").textContent(),
+    "auth/session_expired",
+  );
+  await page.getByRole("button", { name: "Replay run", exact: true }).click();
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForFunction(
+    () =>
+      document.querySelector(".trace-demo")?.getAttribute("data-replay") ===
+      "paused",
+  );
+  await page
+    .getByRole("button", { name: "Resume replay", exact: true })
+    .click();
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.waitForFunction(
+    () =>
+      document.querySelector(".trace-demo")?.getAttribute("data-replay") ===
+      "complete",
+  );
+  writeFileSync(
+    ".impeccable/review/website-motion.json",
+    JSON.stringify(
+      {
+        activeAnimations,
+        replay: "pass",
+        pauseResume: "pass",
+        scenarioInterrupt: "pass",
+        offscreenPause: "pass",
+        reducedMotionSwitch: "pass",
+        keyboardTabs: "pass",
+      },
+      null,
+      2,
+    ),
+  );
+  await motion.close();
   console.log(
-    "Landing page checks passed at 1440px, 390px, 660px and 1024px: font, trace selection, setup anchor, clipboard, FAQ, assets and overflow.",
+    "Landing page checks passed at 1440px, 390px, 660px and 1024px: replay, pause/resume, visibility, reduced motion, scenarios, evidence, integration tabs, keyboard, clipboard, fonts and layout.",
   );
 } finally {
   await browser.close();

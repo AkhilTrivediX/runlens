@@ -30,6 +30,7 @@
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
+    <div class="reading-progress" aria-hidden="true"></div>
     <a class="skip" href="#main">Skip to content</a>
     <header class="site-header wrap">
       <a href="#" class="brand" aria-label="RunLens home"
@@ -118,109 +119,241 @@
             ><span>Run explorer</span
             ><span class="example-label">Illustrative trace</span>
           </div>
-          <div class="demo-title">
-            <div>
-              <span class="project-label">checkout / playwright</span>
-              <h2>Complete checkout</h2>
-            </div>
-            <span class="failed-status"
-              ><svg
-                class="arrow-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 20 20"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
+          <div class="demo-workspace">
+            <aside class="demo-sidebar" aria-label="Example failure scenarios">
+              <div class="sidebar-title">Choose a breaking point</div>
+              <button
+                data-scenario="selector"
+                aria-pressed="true"
+                class="scenario active"
               >
-                <path d="m5 5 10 10M15 5 5 15" />
-              </svg>
-              Failed</span
-            >
-          </div>
-          <div class="trace-scale">
-            <span>Execution trace</span
-            ><span
-              >0 ms <span class="scale-line" aria-hidden="true"></span> 3.2
-              s</span
-            >
-          </div>
-          <div class="trace-steps" aria-label="Example run steps">
-            <button class="trace-step" data-step="0" aria-pressed="false">
-              <svg
-                class="step-icon pass-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 20 20"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
+                <span>Selector missing</span><small>The button changed</small>
+              </button>
+              <button
+                data-scenario="network"
+                aria-pressed="false"
+                class="scenario"
               >
-                <path d="m4 10 4 4 8-8" /></svg
-              ><span class="step-name">Open storefront</span
-              ><span class="timing"
-                ><span class="timing-fill timing-open"></span></span
-              ><span class="step-time">420 ms</span>
-            </button>
-            <button class="trace-step" data-step="1" aria-pressed="false">
-              <svg
-                class="step-icon pass-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 20 20"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
+                <span>Network failure</span><small>The request failed</small>
+              </button>
+              <button
+                data-scenario="session"
+                aria-pressed="false"
+                class="scenario"
               >
-                <path d="m4 10 4 4 8-8" /></svg
-              ><span class="step-name">Add to basket</span
-              ><span class="timing"
-                ><span class="timing-fill timing-basket"></span></span
-              ><span class="step-time">180 ms</span>
-            </button>
-            <button
-              class="trace-step selected"
-              data-step="2"
-              aria-pressed="true"
-            >
-              <svg
-                class="step-icon fail-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 20 20"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
+                <span>Session expired</span><small>The session ended</small>
+              </button>
+              <div class="sidebar-note">
+                Same workflow.<br />Different evidence.
+              </div>
+            </aside>
+            <div class="demo-content">
+              <div class="replay-controls">
+                <span id="replay-status" role="status"
+                  >A failed run, ready to inspect</span
+                ><button id="replay-run">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    aria-hidden="true"
+                  >
+                    <path d="m6 4 10 6-10 6Z" /></svg
+                  ><span>Replay run</span>
+                </button>
+              </div>
+              <div class="demo-title">
+                <div>
+                  <span class="project-label">checkout / playwright</span>
+                  <h2>Complete checkout</h2>
+                </div>
+                <span class="failed-status"
+                  ><svg
+                    class="arrow-icon"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m5 5 10 10M15 5 5 15" />
+                  </svg>
+                  Failed</span
+                >
+              </div>
+              <div class="trace-scale">
+                <span>Execution trace</span
+                ><span
+                  >0 ms <span class="scale-line" aria-hidden="true"></span> 3.2
+                  s</span
+                >
+              </div>
+              <div class="trace-steps" aria-label="Example run steps">
+                <button class="trace-step" data-step="0" aria-pressed="false">
+                  <svg
+                    class="step-icon pass-icon"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m4 10 4 4 8-8" /></svg
+                  ><span class="step-name">Open storefront</span
+                  ><span class="timing"
+                    ><span class="timing-fill timing-open"></span></span
+                  ><span class="step-time">420 ms</span>
+                </button>
+                <button class="trace-step" data-step="1" aria-pressed="false">
+                  <svg
+                    class="step-icon pass-icon"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m4 10 4 4 8-8" /></svg
+                  ><span class="step-name">Add to basket</span
+                  ><span class="timing"
+                    ><span class="timing-fill timing-basket"></span></span
+                  ><span class="step-time">180 ms</span>
+                </button>
+                <button
+                  class="trace-step selected"
+                  data-step="2"
+                  aria-pressed="true"
+                >
+                  <svg
+                    class="step-icon fail-icon"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m5 5 10 10M15 5 5 15" /></svg
+                  ><span class="step-name">Submit order</span
+                  ><span class="timing"
+                    ><span class="timing-fill timing-submit"></span></span
+                  ><span class="step-time">2.6 s</span>
+                </button>
+              </div>
+              <div
+                class="evidence-tabs"
+                role="tablist"
+                aria-label="Trace evidence"
               >
-                <path d="m5 5 10 10M15 5 5 15" /></svg
-              ><span class="step-name">Submit order</span
-              ><span class="timing"
-                ><span class="timing-fill timing-submit"></span></span
-              ><span class="step-time">2.6 s</span>
-            </button>
-          </div>
-          <div class="step-detail" aria-live="polite" aria-atomic="true">
-            <div class="detail-title">
-              <span id="detail-kind">selector_missing</span
-              ><span id="detail-status">Failed step</span>
-            </div>
-            <p id="detail-message">The checkout button could not be found.</p>
-            <code id="detail-selector">[data-testid="place-order"]</code>
-            <div class="detail-context">
-              <span id="detail-evidence">DOM snapshot captured</span
-              ><span id="detail-time">at 00:03.200</span>
+                <button
+                  id="tab-detail"
+                  role="tab"
+                  aria-selected="true"
+                  aria-controls="panel-detail"
+                  tabindex="0"
+                  data-evidence="detail"
+                >
+                  Step detail</button
+                ><button
+                  id="tab-events"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls="panel-events"
+                  tabindex="-1"
+                  data-evidence="events"
+                >
+                  Events</button
+                ><button
+                  id="tab-dom"
+                  role="tab"
+                  aria-selected="false"
+                  aria-controls="panel-dom"
+                  tabindex="-1"
+                  data-evidence="dom"
+                >
+                  DOM
+                </button>
+              </div>
+              <div
+                id="panel-detail"
+                role="tabpanel"
+                aria-labelledby="tab-detail"
+                class="step-detail"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <div class="detail-title">
+                  <span id="detail-kind">selector_missing</span
+                  ><span id="detail-status">Failed step</span>
+                </div>
+                <p id="detail-message">
+                  The checkout button could not be found.
+                </p>
+                <code id="detail-selector">[data-testid="place-order"]</code>
+                <div class="detail-context">
+                  <span id="detail-evidence">DOM snapshot captured</span
+                  ><span id="detail-time">at 00:03.200</span>
+                </div>
+              </div>
+              <div
+                id="panel-events"
+                role="tabpanel"
+                aria-labelledby="tab-events"
+                class="evidence-panel"
+                hidden
+              >
+                <div class="event-line">
+                  <span>00:00.420</span><span>navigation</span
+                  ><strong>Storefront loaded</strong>
+                </div>
+                <div class="event-line">
+                  <span>00:00.600</span><span>click</span
+                  ><strong>Basket updated</strong>
+                </div>
+                <div class="event-line fault-event">
+                  <span>00:03.200</span
+                  ><span id="event-kind">selector_missing</span
+                  ><strong id="event-message">Checkout button not found</strong>
+                </div>
+                <p>Illustrative events from this example workflow.</p>
+              </div>
+              <div
+                id="panel-dom"
+                role="tabpanel"
+                aria-labelledby="tab-dom"
+                class="evidence-panel dom-panel"
+                hidden
+              >
+                <div class="dom-caption">
+                  At the breaking point <span>Illustrative DOM</span>
+                </div>
+                <pre><code id="dom-code">&lt;form data-testid="checkout"&gt;
+  &lt;button data-testid="confirm-order"&gt;
+    Confirm order
+  &lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                <p id="dom-note">
+                  The workflow expected place-order. The page has confirm-order.
+                </p>
+              </div>
             </div>
           </div>
           <div class="demo-footer">
@@ -228,7 +361,7 @@
               ><span class="local-dot" aria-hidden="true"></span>Evidence stays
               with the run</span
             ><span
-              >Click a step to inspect
+              >Replay, select a step or switch the evidence
               <svg
                 class="arrow-icon"
                 width="16"
@@ -398,19 +531,58 @@
           </p>
         </div>
         <div class="code-panel">
-          <div class="code-header">
-            <span>Start from source</span
-            ><button
-              id="copy-setup"
-              class="copy-button"
-              aria-label="Copy setup commands"
+          <div
+            class="integration-tabs"
+            role="tablist"
+            aria-label="Integration example"
+          >
+            <button
+              role="tab"
+              aria-selected="true"
+              aria-controls="integration-panel"
+              id="integration-source"
+              data-integration="source"
+              tabindex="0"
             >
-              Copy commands
+              Source setup</button
+            ><button
+              role="tab"
+              aria-selected="false"
+              aria-controls="integration-panel"
+              id="integration-playwright"
+              data-integration="playwright"
+              tabindex="-1"
+            >
+              Playwright</button
+            ><button
+              role="tab"
+              aria-selected="false"
+              aria-controls="integration-panel"
+              id="integration-puppeteer"
+              data-integration="puppeteer"
+              tabindex="-1"
+            >
+              Puppeteer
             </button>
           </div>
-          <pre
-            id="setup-code"
-          ><code><span class="code-comment"># Get the release candidate</span>
+          <div
+            id="integration-panel"
+            role="tabpanel"
+            aria-labelledby="integration-source"
+          >
+            <div class="code-header">
+              <span id="code-caption">Start from source</span
+              ><button
+                id="copy-setup"
+                class="copy-button"
+                aria-label="Copy setup commands"
+              >
+                Copy commands
+              </button>
+            </div>
+            <pre
+              id="setup-code"
+            ><code><span class="code-comment"># Get the release candidate</span>
 git clone --branch codex/release-readiness \
   https://github.com/AkhilTrivediX/runlens.git
 cd runlens
@@ -420,8 +592,9 @@ pnpm build
 <span class="code-comment"># Capture a browser run, then inspect it</span>
 pnpm test:playwright
 pnpm start:dashboard</code></pre>
-          <div class="code-footer">
-            Open <code>http://127.0.0.1:5173</code> after the server starts.
+            <div class="code-footer">
+              Open <code>http://127.0.0.1:5173</code> after the server starts.
+            </div>
           </div>
           <p id="copy-status" class="copy-status" role="status"></p>
         </div>
