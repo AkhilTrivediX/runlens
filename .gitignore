@@ -4,6 +4,7 @@ dist/
 .next/
 .vite/
 coverage/
+lab/test-runs/ui/
 *.tsbuildinfo
 
 .env

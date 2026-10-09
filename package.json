@@ -25,7 +25,8 @@
     "dev:dashboard": "pnpm --filter @runlens/core build && pnpm --filter runlens build && pnpm --filter @runlens/dashboard dev",
     "clean:traces": "tsx scripts/clean-traces.ts",
     "start:dashboard": "node packages/sdk/dist/cli.js dashboard --db lab/test-runs/runlens.db",
-    "test:release": "node scripts/release-smoke.mjs"
+    "test:release": "node scripts/release-smoke.mjs",
+    "test:ui": "tsx scripts/dashboard-ui-smoke.mts"
   },
   "devDependencies": {
     "@types/node": "^24.0.10",

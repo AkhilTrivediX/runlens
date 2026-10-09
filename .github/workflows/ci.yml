@@ -37,4 +37,5 @@ jobs:
       - run: pnpm test:playwright
       - run: pnpm test:complex
       - run: pnpm test:cli
+      - run: pnpm test:ui
       - run: pnpm test:release
