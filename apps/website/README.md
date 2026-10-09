@@ -2,6 +2,10 @@
 
 The public product landing page. The RunLens dashboard remains a separate local application.
 
+Live site: [runlens-mauve.vercel.app](https://runlens-mauve.vercel.app).
+
+Published to Vercel production on 9 October 2026 using Node 24. The public deployment passes the same four viewport browser checks as the local build. Contact email remains akhiltrivedix@gmail.com.
+
 From the repository root:
 
 ```sh
