@@ -19,3 +19,11 @@ runlens.db
 *.sqlite
 *.sqlite3
 
+# Local assistant working files
+AGENTS.md
+CLAUDE.md
+PRODUCT.md
+DESIGN.md
+.impeccable/
+.agents/
+.codex/
